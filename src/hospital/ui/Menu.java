@@ -22,9 +22,13 @@ public class Menu {
             System.out.println("2. MÉDICOS");
             System.out.println("3. CONSULTAS");
             System.out.println("0. SAIR");
-            System.out.print("Selecione uma opção: ");
-            op = sc.nextInt(); /*essa parte deve MELHORAR para garantir a analise correta mesmo que usuario nao
-                               forneça um int na entrada, de forma que o looping nao pare*/
+            try {
+                System.out.print("Selecione uma opção: ");
+                op = Integer.parseInt(sc.nextLine());
+            }
+            catch(NumberFormatException e){
+                op = -1;
+            }
 
             switch (op){
                 case 1:
@@ -40,7 +44,7 @@ public class Menu {
                     System.out.println("Saindo ...");
                     break;
                 default:
-                    System.out.println("opção inválida");
+                    System.out.println("Opção inválida, tente novamente");
                     break;
             }
         }
@@ -48,6 +52,7 @@ public class Menu {
 
     public void menuPacientes() {
         int op;
+
         System.out.println("\n======= MENU PACIENTES ========");
         System.out.println("1. CADASTRAR PACIENTE");
         System.out.println("2. LISTAR PACIENTE");
@@ -58,23 +63,8 @@ public class Menu {
 
         switch (op) {
             case 1:
-                int r = 0;
-                do {
-                    System.out.println("AREA DE CADASTRO...");
-                    System.out.print("Digite o nome do paciente:");
-                    String nome = sc.nextLine();
-                    System.out.print("Digite a idade: ");
-                    int idade = sc.nextInt();
-                    sc.nextLine();
-                    System.out.print("Digite o cpf: ");
-                    String cpf = sc.nextLine(); //será necessário implementar uma forma de verificar se o cpf está no formato adequado
-                    pacienteService.cadastrarPaciente(nome, cpf, idade);
-                    System.out.println("1. CADASTRAR OUTRO PACIENTE\n0. SAIR ");
-                     r = sc.nextInt();
-                     sc.nextLine();
-                }
-                while (r == 1); //metodo provisório de verificar se o usario deseja continuar cadastrando pacientes
-                break;
+               cadastroPacientes();
+               break;
             case 2:
                 System.out.println("AREA PARA LISTAR...");
                 for (Pacientes p : pacienteService.listarPacientes()){
@@ -88,8 +78,42 @@ public class Menu {
                 System.out.println("opção inválida");
         }
     }
+    private void cadastroPacientes(){
+        int r = 0;
+        do {
+            System.out.println("======= CADASTRO DE PACIENTES ========");
+            System.out.print("Digite o nome do paciente:");
+            String nome = sc.nextLine();
+            int idade =0;
+            do{ // esse looping é responsável para solicitar uma idade válida
+                r=0;
+                try {
+                    System.out.print("Digite a idade: ");
+                     idade = Integer.parseInt(sc.nextLine());
+                }
+                catch (NumberFormatException e){
+                    System.out.println("erro: valor para idade inválido, tente novamente");
+                    r = -1;
+                }
+            }
+            while (r ==-1);
+            System.out.print("Digite o cpf: ");
+            String cpf = sc.nextLine(); //será necessário implementar uma forma de verificar se o cpf está no formato adequado
+            pacienteService.adicionarPaciente(nome, cpf, idade);
+            System.out.println();
+            System.out.println("""
+                    1. CADASTRAR OUTRO PACIENTE\
+                    
+                    2. VOLTAR AO MENU PRINCIPAL \
+                    
+                    3. VOLTAR AO MENU DE PACIENTES""");
+            r = sc.nextInt();
+            sc.nextLine();
+        }
+        while (r == 1); //metodo provisório de verificar se o usario deseja continuar cadastrando pacientes
+    }
 
-    public void menuMedicos() {
+    private void menuMedicos() {
         System.out.println("\n======= MENU MÉDICOS =======");
         System.out.println("1. CADASTRAR MÉDICO");
         System.out.println("2. LISTAR MÉDICOS");

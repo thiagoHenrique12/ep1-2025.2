@@ -1,7 +1,6 @@
 package hospital.services;
 
 import hospital.entidades.Pacientes;
-import hospital.entidades.Pacientes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,7 @@ public class PacienteService {
 
     private List<Pacientes> listaPacientes = new ArrayList<>();
 
-    public void cadastrarPaciente(String nome, String cpf, int idade){
+    public void adicionarPaciente(String nome, String cpf, int idade){
         String id = UUID.randomUUID().toString();  /* buscar forma de realizar diferenciação entre os ids de medico
                                                     e paciente P------ e M -------*/
         Pacientes paciente = new Pacientes(id,nome,cpf, idade);
