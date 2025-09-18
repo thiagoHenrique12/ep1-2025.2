@@ -1,6 +1,8 @@
 package hospital.ui;
 
+import hospital.entidades.Medicos;
 import hospital.entidades.Pacientes;
+import hospital.services.MedicoService;
 import hospital.services.PacienteService;
 
 import java.util.Scanner;
@@ -8,7 +10,9 @@ import java.util.Scanner;
 public class Menu {
     private Scanner sc = new Scanner(System.in);
     private PacienteService pacienteService = new PacienteService();
+    private MedicoService medicoService = new MedicoService();
     private Pacientes paciente = new Pacientes();
+    private Medicos medico =new Medicos();
 
     public void iniciar() {
         int op = -1;
@@ -85,9 +89,36 @@ public class Menu {
         }
     }
 
-    public void menuMedicos(){
+    public void menuMedicos() {
         System.out.println("\n======= MENU MÉDICOS =======");
         System.out.println("1. CADASTRAR MÉDICO");
+        System.out.println("2. LISTAR MÉDICOS");
+        System.out.print("Selecione uma opção:");
+        int op = sc.nextInt();
+        sc.nextLine();
+        switch (op) {
+            case 1:
+                int r = 0;
+                do {
+                    System.out.println("AREA DE CADASTRO...");
+                    System.out.print("Digite o nome do médico:");
+                    String nome = sc.nextLine();
+                    System.out.print("Digite a especialidade: ");
+                    String especialidade = sc.nextLine();
+                    System.out.print("Digite o crm: ");
+                    String crm = sc.nextLine(); //será necessário implementar uma forma de verificar se o crm está no formato adequado
+                    medicoService.cadastrarMedico(nome, crm, especialidade);
+                    System.out.println("1. CADASTRAR OUTRO MÉDICO\n0. SAIR ");
+                    System.out.print("Selecione uma opção: ");
+                    r = sc.nextInt();
+                    sc.nextLine();
+                }
+                while (r == 1);
+                break;
+            case 2:
+                for( Medicos p : medicoService.listarMedicos() ){
+                    System.out.println(p);
+                }
+        }
     }
-
 }

@@ -12,7 +12,8 @@ public class PacienteService {
     private List<Pacientes> listaPacientes = new ArrayList<>();
 
     public void cadastrarPaciente(String nome, String cpf, int idade){
-        String id = UUID.randomUUID().toString();
+        String id = UUID.randomUUID().toString();  /* buscar forma de realizar diferenciação entre os ids de medico
+                                                    e paciente P------ e M -------*/
         Pacientes paciente = new Pacientes(id,nome,cpf, idade);
         listaPacientes.add(paciente);
         System.out.println("Paciente cadastrado com sucesso");
