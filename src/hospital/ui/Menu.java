@@ -1,5 +1,6 @@
 package hospital.ui;
 
+import hospital.entidades.Pacientes;
 import hospital.services.PacienteService;
 
 import java.util.Scanner;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 public class Menu {
     private Scanner sc = new Scanner(System.in);
     private PacienteService pacienteService = new PacienteService();
+    private Pacientes paciente = new Pacientes();
 
     public void iniciar() {
         int op = -1;
@@ -52,27 +54,34 @@ public class Menu {
 
         switch (op) {
             case 1:
-                System.out.println("AREA DE CADASTRO...");
-                System.out.print("Digite o nome do paciente:");
-                String nome = sc.nextLine();
-                System.out.print("Digite a idade: " );
-                int idade = sc.nextInt();
-                sc.nextLine();
-                System.out.print("Digite o cpf: ");
-                String cpf = sc.nextLine();
-                pacienteService.cadastrarPaciente(nome, cpf, idade);
-
+                int r = 0;
+                do {
+                    System.out.println("AREA DE CADASTRO...");
+                    System.out.print("Digite o nome do paciente:");
+                    String nome = sc.nextLine();
+                    System.out.print("Digite a idade: ");
+                    int idade = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Digite o cpf: ");
+                    String cpf = sc.nextLine(); //será necessário implementar uma forma de verificar se o cpf está no formato adequado
+                    pacienteService.cadastrarPaciente(nome, cpf, idade);
+                    System.out.println("1. CADASTRAR OUTRO PACIENTE\n0. SAIR ");
+                     r = sc.nextInt();
+                     sc.nextLine();
+                }
+                while (r == 1); //metodo provisório de verificar se o usario deseja continuar cadastrando pacientes
                 break;
             case 2:
                 System.out.println("AREA PARA LISTAR...");
+                for (Pacientes p : pacienteService.listarPacientes()){
+                    System.out.println(p);
+                }
                 break;
             case 0:
                 System.out.println("saindo...");
                 break;
             default:
                 System.out.println("opção inválida");
-                /* após o usuário fornecer oq ele deseja, basta chamar um metodo situado em services.PacienteService*/
-
         }
     }
 

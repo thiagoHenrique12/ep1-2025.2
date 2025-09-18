@@ -6,11 +6,18 @@ public class Pacientes {
     private int idade;
     private String id;
 
+    public Pacientes (){
 
+    }
     public Pacientes(String id, String nome, String cpf, int idade){
         this.nome = nome;
         this.cpf = cpf;
         this.id = id;
         this.idade= idade;
+    }
+
+    public String toString() {
+        return nome +";"+cpf+";"+idade+";"+id;
+
     }
 }
