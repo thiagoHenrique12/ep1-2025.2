@@ -4,8 +4,12 @@ import hospital.entidades.Medicos;
 import hospital.entidades.Pacientes;
 import hospital.services.MedicoService;
 import hospital.services.PacienteService;
+import hospital.services.PessoaService;
 
 import java.util.Scanner;
+
+import static hospital.services.PessoaService.validarCpf;
+import static hospital.services.PessoaService.validarIdade;
 
 public class Menu {
     private Scanner sc = new Scanner(System.in);
@@ -85,40 +89,38 @@ public class Menu {
     }
 
     private int cadastroPacientes(){
-        int r = 0;
+        int resposta = 0;
         do {
             System.out.println("======= CADASTRO DE PACIENTES ========");
             System.out.print("Digite o nome do paciente:");
             String nome = sc.nextLine();
-            int idade =0;
-            boolean valido =false;
-            do{ // esse looping é responsável para solicitar uma idade válida
-                try {
-                    System.out.print("Digite a idade: ");
-                     idade = Integer.parseInt(sc.nextLine());
-                     valido = true;
-                }
-                catch (NumberFormatException e){
-                    System.out.println("erro: valor para idade inválido, tente novamente");
+            int idade = PessoaService.validarIdade(); //validar idade esta incoerente, necessario separar a validação do input
+
+            String cpf;
+            do{
+                System.out.print("Digite o cpf: ");
+                cpf = sc.nextLine();
+                if(validarCpf(cpf) == null){
+                    System.out.println("cpf inválido, tente novamente");
                 }
             }
-            while (!valido);
+            while(validarCpf(cpf)==null);
 
-            System.out.print("Digite o cpf: ");
-            String cpf = sc.nextLine(); //será necessário implementar uma forma de verificar se o cpf está no formato adequado
-            pacienteService.adicionarPaciente(nome, cpf, idade);
+
+            pacienteService.adicionarPaciente(nome, PessoaService.validarCpf(cpf), idade);
             System.out.println();
 
-            r =pcPaciente(); /* aqui o valor retornado pelo método precisou ser armazenado em r pois logo abaixo esse
-                               esse valor será retornado para menuPacientes*/
+            resposta =pCadastroPaciente(); /* aqui o valor retornado pelo método precisou ser
+                                              armazenado em r pois logo abaixo esse
+                                              esse valor será retornado para menuPacientes*/
         }
-        while (r== 1);
-        return r;
+        while (resposta == 1);
+        return resposta;
     }
 
-    // método auxiliar pós cadastro de pacientes
-    private int pcPaciente(){
-        int r= 0;
+    // método auxiliar pós cadastro do pacientes
+    private int pCadastroPaciente(){
+        int resposta= 0;
         boolean valido = true;
         while(valido) {
             System.out.println("""
@@ -127,15 +129,16 @@ public class Menu {
                     2. VOLTAR AO MENU DE PACIENTES \
                     
                     3. VOLTAR AO MENU PRINCIPAL""");
-            r = Integer.parseInt(sc.nextLine());
-            if (r != 1 && r != 2 && r != 3) {
+            System.out.print("Selecione uma opção: ");
+            resposta = Integer.parseInt(sc.nextLine());
+            if (resposta != 1 && resposta != 2 && resposta != 3) {
                 System.out.println("Digite uma opção válida.");
             }
             else {
                 valido = false;
             }
         }
-        return r;
+        return resposta;
     }
     private void menuMedicos() {
         System.out.println("\n======= MENU MÉDICOS =======");
