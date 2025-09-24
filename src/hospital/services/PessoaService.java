@@ -24,7 +24,6 @@ public class PessoaService {
     }
 
 
-
     public static String validarCpf(String cpf){
         if (cpf == null) return null;
 
