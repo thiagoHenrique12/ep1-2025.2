@@ -5,23 +5,24 @@ import java.util.Scanner;
 public class PessoaService {
     private static Scanner sc = new Scanner(System.in);
 
-    public static int validarIdade(){
-        while(true){
+    public static int validarIdade(String idade){
             try {
-                System.out.print("Digite a idade: ");
-               int idade= Integer.parseInt(sc.nextLine());
-               if (idade < 0){
+                int idadeValidada= Integer.parseInt(idade);
+
+               if ( idadeValidada< 0){
                    System.out.println("Idade inválida, tente novamente");
+                   return -1;
                }
                else{
-                   return idade;
+                   return idadeValidada;
                }
             }
             catch (NumberFormatException e){
                 System.out.println("Idade inválida, tente novamente ");
+                return -1;
             }
         }
-    }
+
 
 
     public static String validarCpf(String cpf){

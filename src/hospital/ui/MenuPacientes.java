@@ -52,19 +52,26 @@ public class MenuPacientes {
             System.out.println("======= CADASTRO DE PACIENTES ========");
             System.out.print("Digite o nome do paciente:");
             String nome = sc.nextLine();
-            int idade = PessoaService.validarIdade(); //validar idade esta incoerente, necessario separar a validação do input
-
+            int idadeValidada;
+            do {
+                System.out.print("Digite a idade: ");
+                String idade = sc.nextLine();
+                idadeValidada = PessoaService.validarIdade(idade); //validar idade esta incoerente, necessario separar a validação do input
+            }
+            while(idadeValidada < 0);
             String cpf;
             do {
+                System.out.println("O CPF deve estar no formato de 11 dígitos seguidos ou no formato xxx.xxx.xxx-xx.");
                 System.out.print("Digite o cpf: ");
                 cpf = sc.nextLine();
-                if (validarCpf(cpf) == null) {
+                cpf = validarCpf(cpf);
+                if (cpf == null) {
                     System.out.println("cpf inválido, tente novamente");
                 }
             }
-            while (validarCpf(cpf) == null);
+            while (cpf == null);
 
-            pacienteService.adicionarPaciente(nome, PessoaService.validarCpf(cpf), idade);
+            pacienteService.adicionarPaciente(nome, cpf, idadeValidada);
             System.out.println();
             return menuPosCadastro();
 
