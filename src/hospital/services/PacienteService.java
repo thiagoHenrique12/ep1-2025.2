@@ -13,8 +13,7 @@ public class PacienteService {
 
 
     public Pacientes adicionarPaciente(String nome, String cpf, int idade){
-        String id = UUID.randomUUID().toString();           /* buscar forma de realizar diferenciação entre os ids de medico
-                                                            e paciente P------ e M -------*/
+        String id = "P-"+ UUID.randomUUID().toString().substring(0, 8);
         Pacientes paciente = new Pacientes(id,nome,cpf, idade);
         repository.salvarPaciente(paciente);
         return paciente;

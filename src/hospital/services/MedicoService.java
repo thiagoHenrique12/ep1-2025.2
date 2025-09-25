@@ -10,7 +10,7 @@ public class MedicoService {
     private List<Medicos> listaMedicos = new ArrayList<>();
 
     public void cadastrarMedico(String nome, String crm, String especialidade){
-        String id = "M-" + UUID.randomUUID();
+        String id = "M-" + UUID.randomUUID().toString().substring(0, 8);
         Medicos medico = new Medicos(nome, crm, especialidade, id);
         listaMedicos.add(medico);
         System.out.println("Médico cadastrado com sucesso!");

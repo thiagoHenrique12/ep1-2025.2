@@ -1,6 +1,7 @@
 package hospital.ui;
 
 
+import hospital.services.ConsultaService;
 import hospital.services.MedicoService;
 
 import java.util.Scanner;
@@ -16,6 +17,7 @@ public class MenuMedicos {
         System.out.println("\n======= MENU MÉDICOS ========");
         System.out.println("1. CADASTRAR MÉDICO");
         System.out.println("2. LISTAR MÉDICOS");
+        System.out.println("3teste");
         System.out.print("Selecione uma opção: ");
         op = validarInteiro(sc);
         switch (op){
@@ -23,7 +25,11 @@ public class MenuMedicos {
                 menuCadastrarMedico(sc);
                 break;
             case 2:
-
+                break;
+            case 3:
+                // aqui chamaremos o teste improvisado
+                ConsultaService scTeste = new ConsultaService();
+                scTeste.iniciarTestes();
                 break;
         }
     }
