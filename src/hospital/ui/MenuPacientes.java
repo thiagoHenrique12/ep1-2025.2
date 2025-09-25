@@ -10,10 +10,10 @@ import static hospital.services.PessoaService.validarCpf;
 import static hospital.utils.InputUtils.validarInteiro;
 
 public class MenuPacientes {
-    Scanner sc = new Scanner(System.in);
+
     PacienteService pacienteService = new PacienteService();
 
-    public void exibirMenu() {
+    public void exibirMenu(Scanner sc) {
         int op = -1;
         while (op != 0) {
 
@@ -22,13 +22,13 @@ public class MenuPacientes {
             System.out.println("2. LISTAR PACIENTE");
             System.out.println("0. SAIR");
             System.out.print("Selecione uma opção: ");
-            op = validarInteiro();
+            op = validarInteiro(sc);
 
             switch (op) {
                 case 1:
                      //looping para realizar cadastro de novos pacientes
                     do {
-                        op = menuCadastrarPaciente();
+                        op = menuCadastrarPaciente(sc);
                     }
                     while (op == 1);
                     break;
@@ -47,7 +47,7 @@ public class MenuPacientes {
         }
     }
 
-    private int menuCadastrarPaciente() {
+    private int menuCadastrarPaciente(Scanner sc) {
         int resposta = 0;
             System.out.println("======= CADASTRO DE PACIENTES ========");
             System.out.print("Digite o nome do paciente:");
@@ -73,12 +73,12 @@ public class MenuPacientes {
 
             pacienteService.adicionarPaciente(nome, cpf, idadeValidada);
             System.out.println();
-            return menuPosCadastro();
+            return menuPosCadastro(sc);
 
         }
 
 
-    private int menuPosCadastro() {
+    private int menuPosCadastro(Scanner sc) {
         int resposta = 0;
         boolean valido = true;
         while (valido) {

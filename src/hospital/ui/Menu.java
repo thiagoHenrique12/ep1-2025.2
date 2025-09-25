@@ -3,9 +3,13 @@ package hospital.ui;
 import java.util.Scanner;
 
 public class Menu {
-    private Scanner sc = new Scanner(System.in);
-    private final MenuPacientes menuPacientes = new MenuPacientes();
+    private final Scanner sc = new Scanner(System.in);
+    /* optei por fazer um Scanner sendo final, assim será evitado duplicação e haverá um único fechamento
+    com sc.close para esse scanner, evitando possíveis erros e quebras na aplicação
+     */
 
+    private final MenuPacientes menuPacientes = new MenuPacientes();
+    private final MenuMedicos menuMedicos = new MenuMedicos();
 
     public void iniciar() {
 
@@ -25,16 +29,17 @@ public class Menu {
             }
             switch (op){
                 case 1:
-                    menuPacientes.exibirMenu();
+                    menuPacientes.exibirMenu(sc);
                     break;
                 case 2:
-                    //menuMedicos();
+                    menuMedicos.exibirMenu(sc);
                     break;
                 case 3:
 
                     break;
                 case 0:
-                    System.out.println("Saindo ...");
+                    System.out.println("Finalizando o sistema ...");
+                    sc.close();
                     break;
                 default:
                     System.out.println("Opção inválida, tente novamente");
@@ -43,35 +48,3 @@ public class Menu {
         }
     }
 }
-//    private void menuMedicos() {
-//        System.out.println("\n======= MENU MÉDICOS =======");
-//        System.out.println("1. CADASTRAR MÉDICO");
-//        System.out.println("2. LISTAR MÉDICOS");
-//        System.out.print("Selecione uma opção:");
-//        int op = sc.nextInt();
-//        sc.nextLine();
-//        switch (op) {
-//            case 1:
-//                int r = 0;
-//                do {
-//                    System.out.println("AREA DE CADASTRO...");
-//                    System.out.print("Digite o nome do médico:");
-//                    String nome = sc.nextLine();
-//                    System.out.print("Digite a especialidade: ");
-//                    String especialidade = sc.nextLine();
-//                    System.out.print("Digite o crm: ");
-//                    String crm = sc.nextLine(); //será necessário implementar uma forma de verificar se o crm está no formato adequado
-//                    medicoService.cadastrarMedico(nome, crm, especialidade);
-//                    System.out.println("1. CADASTRAR OUTRO MÉDICO\n0. SAIR ");
-//                    System.out.print("Selecione uma opção: ");
-//                    r = sc.nextInt();
-//                    sc.nextLine();
-//                }
-//                while (r == 1);
-//                break;
-//            case 2:
-//                for( Medicos p : medicoService.listarMedicos() ){
-//                    System.out.println(p);
-//                }
-//        }
-//    }

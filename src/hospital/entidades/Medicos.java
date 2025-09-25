@@ -5,6 +5,7 @@ public class Medicos {
     private String crm;
     private String especialidade;
     private String id;
+    private double valorDaConsulta;
 
     public Medicos (){
         this.nome="";
