@@ -1,18 +1,18 @@
 package hospital.entidades;
 
-public class Medicos {
+public class Medico {
     private String nome;
     private String crm;
     private String especialidade;
     private String id;
     private double valorDaConsulta;
 
-    public Medicos (){
+    public Medico(){
         this.nome="";
         this.crm="";
         this.especialidade = "";
     }
-    public Medicos (String nome, String crm,String especialidade, String id){
+    public Medico(String nome, String crm, String especialidade, String id){
         this.crm =crm;
         this.nome= nome;
         this.especialidade=especialidade;

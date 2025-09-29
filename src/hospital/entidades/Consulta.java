@@ -1,7 +1,7 @@
 
 package hospital.entidades;
 
-public class Consultas {
+public class Consulta {
     private String id;
     private String pacienteId; // ID para referência ao paciente
     private String medicoId;   // ID para referência ao médico
@@ -11,7 +11,7 @@ public class Consultas {
     private double custoFinal; // Custo após descontos aplicar Polimorfismo futuro
 
 
-    public Consultas(String id, String pacienteId, String medicoId, String dataHora, String local, String status, double custoFinal) {
+    public Consulta(String id, String pacienteId, String medicoId, String dataHora, String local, String status, double custoFinal) {
         this.id = id;
         this.pacienteId = pacienteId;
         this.medicoId = medicoId;
@@ -21,7 +21,7 @@ public class Consultas {
         this.custoFinal = custoFinal;
     }
 
-    public Consultas() {}
+    public Consulta() {}
 
 
     public String getId() { return id; }

@@ -1,6 +1,6 @@
 package hospital.ui;
 
-import hospital.entidades.Pacientes;
+import hospital.entidades.Paciente;
 import hospital.services.PacienteService;
 import hospital.services.PessoaService;
 
@@ -34,7 +34,7 @@ public class MenuPacientes {
                     break;
                 case 2:
                     System.out.println("AREA PARA LISTAR...");
-                    for (Pacientes p : pacienteService.listarPacientes()) { //fazer um metodo para isso
+                    for (Paciente p : pacienteService.listarPacientes()) { //fazer um metodo para isso
                         System.out.println(p);
                     }
                     break;

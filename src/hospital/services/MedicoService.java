@@ -1,17 +1,17 @@
 package hospital.services;
 
-import hospital.entidades.Medicos;
+import hospital.entidades.Medico;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class MedicoService {
-    private List<Medicos> listaMedicos = new ArrayList<>();
+    private List<Medico> listaMedicos = new ArrayList<>();
 
     public void cadastrarMedico(String nome, String crm, String especialidade){
         String id = "M-" + UUID.randomUUID().toString().substring(0, 8);
-        Medicos medico = new Medicos(nome, crm, especialidade, id);
+        Medico medico = new Medico(nome, crm, especialidade, id);
         listaMedicos.add(medico);
         System.out.println("Médico cadastrado com sucesso!");
     }
@@ -33,7 +33,7 @@ public class MedicoService {
 
 
 
-    public List<Medicos> listarMedicos(){
+    public List<Medico> listarMedicos(){
         return listaMedicos;
     }
 }

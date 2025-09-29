@@ -1,6 +1,6 @@
 package hospital.services;
 
-import hospital.entidades.Pacientes;
+import hospital.entidades.Paciente;
 import hospital.repository.PacienteRepository;
 
 
@@ -12,13 +12,13 @@ public class PacienteService {
     private final PacienteRepository repository = new PacienteRepository();
 
 
-    public Pacientes adicionarPaciente(String nome, String cpf, int idade){
+    public Paciente adicionarPaciente(String nome, String cpf, int idade){
         String id = "P-"+ UUID.randomUUID().toString().substring(0, 8);
-        Pacientes paciente = new Pacientes(id,nome,cpf, idade);
+        Paciente paciente = new Paciente(id,nome,cpf, idade);
         repository.salvarPaciente(paciente);
         return paciente;
     }
-    public List<Pacientes> listarPacientes() {
+    public List<Paciente> listarPacientes() {
         return repository.listarTodos();
     }
 }

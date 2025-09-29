@@ -1,15 +1,15 @@
 package hospital.entidades;
 
-public class Pacientes {
+public class Paciente {
     private String nome;
     private String cpf;
     private int idade;
     private String id;
 
-    public Pacientes (){
+    public Paciente(){
 
     }
-    public Pacientes(String id, String nome, String cpf, int idade){
+    public Paciente(String id, String nome, String cpf, int idade){
         this.nome = nome;
         this.cpf = cpf;
         this.id = id;

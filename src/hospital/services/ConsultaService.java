@@ -1,6 +1,6 @@
 package hospital.services;
 
-import hospital.entidades.Consultas;
+import hospital.entidades.Consulta;
 import hospital.repository.ConsultaRepository;
 import hospital.repository.PacienteRepository;
 
@@ -28,7 +28,7 @@ public class ConsultaService {
         String horarioConflito = "2025-11-01 15:00";
 
         System.out.println("agendando consulta1....");
-        Consultas base = agendarConsulta(p1, m1, horarioConflito, s1, custo);
+        Consulta base = agendarConsulta(p1, m1, horarioConflito, s1, custo);
 
         if (base != null) {
             System.out.println("agendada com sucesso. Total Ativas: " + consultaRepository.listarTodasAtivas().size());
@@ -37,7 +37,7 @@ public class ConsultaService {
 
         // testando o conflito de horario para médico ocupado
         System.out.println(" Teste: Médico Ocupado ");
-        Consultas conflitoMedico = agendarConsulta(
+        Consulta conflitoMedico = agendarConsulta(
                 "Paciente-2", m1, horarioConflito, s2, custo // Mesmo Médico (m1), Mesmo Horário
         );
         if (conflitoMedico == null) {
@@ -48,7 +48,7 @@ public class ConsultaService {
 
 
         System.out.println("testando se o local vai estar ocupado");
-        Consultas conflitoLocal = agendarConsulta(
+        Consulta conflitoLocal = agendarConsulta(
                 "P-3", m2, horarioConflito, s1, custo // Mesmo Local (s1), outro Médico (m2)
         );
         if (conflitoLocal == null) {
@@ -58,7 +58,7 @@ public class ConsultaService {
         }
 
         System.out.println("testandi horário Livre");
-        Consultas livre = agendarConsulta(
+        Consulta livre = agendarConsulta(
                 "P-4", m2, "2025-11-01 16:00", s2, custo // Tudo diferente dessa vez
         );
         if (livre != null) {
@@ -74,7 +74,7 @@ public class ConsultaService {
 
 
 
-    public Consultas agendarConsulta(
+    public Consulta agendarConsulta(
             String pacienteId,
             String medicoId,
             String dataHora,
@@ -91,7 +91,7 @@ public class ConsultaService {
         double custoFinal = custoBaseMedico; // Polimorfismo futuro, necessario melhorar a parte de médicos
         String id = "C-" + UUID.randomUUID().toString().substring(0, 8);
 
-        Consultas novaConsulta = new Consultas(
+        Consulta novaConsulta = new Consulta(
                 id, pacienteId, medicoId, dataHora, local, "AGENDADA", custoFinal
         );
 
@@ -101,9 +101,9 @@ public class ConsultaService {
     }
 
     private boolean checarConflito(String novaDataHora, String novoMedicoId, String novoLocal) {
-        List<Consultas> consultasAtivas = consultaRepository.listarTodasAtivas();
+        List<Consulta> consultasAtivas = consultaRepository.listarTodasAtivas();
 
-        for (Consultas existente : consultasAtivas) {
+        for (Consulta existente : consultasAtivas) {
 
             // validando o Conflito entre MÉDICO E HORÁRIO
             if (existente.getMedicoId().equals(novoMedicoId) &&
