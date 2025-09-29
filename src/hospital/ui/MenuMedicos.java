@@ -12,28 +12,37 @@ import static hospital.utils.InputUtils.validarInteiro;
 public class MenuMedicos {
     private final MedicoService medicoService = new MedicoService();
 
-    public void exibirMenu(Scanner sc){
-        int op;
-        System.out.println("\n======= MENU MÉDICOS ========");
-        System.out.println("1. CADASTRAR MÉDICO");
-        System.out.println("2. LISTAR MÉDICOS");
-        System.out.println("3teste");
-        System.out.print("Selecione uma opção: ");
-        op = validarInteiro(sc);
-        switch (op){
-            case 1:
-                menuCadastrarMedico(sc);
-                break;
-            case 2:
-                break;
-            case 3:
-                // aqui chamaremos o teste improvisado
-                ConsultaService scTeste = new ConsultaService();
-                scTeste.iniciarTestes();
-                break;
+    public void exibirMenu(Scanner sc) {
+        int op=-1;
+        while (op != 0) {
+            System.out.println("\n======= MENU MÉDICOS ========");
+            System.out.println("1. CADASTRAR MÉDICO");
+            System.out.println("2. LISTAR MÉDICOS");
+            System.out.println("3teste");
+            System.out.print("Selecione uma opção: ");
+            op = validarInteiro(sc);
+            switch (op) {
+                case 1:
+                    do {
+                        op = menuCadastrarMedico(sc);
+                    }
+                    while(op ==1);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    // aqui chamaremos o teste improvisado
+                    ConsultaService scTeste = new ConsultaService();
+                    scTeste.iniciarTestes();
+                    break;
+                case 0:
+                    System.out.println("saindo...");
+                    break;
+                default:
+                    System.out.println("opção inválida");
+            }
         }
     }
-
     public int menuCadastrarMedico(Scanner sc){
         System.out.println("=== CADASTRANDO MÉDICO ===");
         System.out.print("Digite o nome: ");
@@ -43,21 +52,21 @@ public class MenuMedicos {
             System.out.print("Digite o CRM (apenas números): ");
             crm = sc.nextLine();
             if (validarCrm(crm)) {
-                System.out.println("CRM inválido. Deve conter apenas números.");
+                System.out.println("CRM inválido. Deve conter 5 dígitos numéricos.");
             }
         } while (validarCrm(crm));
 
-        abaEspecialidades(sc);
-        return 0;
+        String especialidade= abaEspecialidades(sc); //mudanças feitas aqui
+        System.out.println();
+        return abaPosCadastro(sc);
     }
 
     public boolean validarCrm(String crm) {
-        if (crm == null) return true;
-        // Exemplo: 5 a 10 dígitos, apenas números. Ajuste conforme o requisito.
-        return !crm.matches("\\d{5,10}");
+        if (crm == null) return true; // esse true serve para ficar no looping while enquanto o crm for null
+        return !crm.matches("\\d{5}");
     }
 
-    public void abaEspecialidades(Scanner sc){
+    public String abaEspecialidades(Scanner sc){
         String especialidade;
         System.out.println();
         System.out.println("DEFINA UMA ESPECIALIDADE");
@@ -74,6 +83,31 @@ public class MenuMedicos {
             especialidade = medicoService.validarEspecialidade(op);
         }
         while (especialidade== null);
+        return especialidade;
+        }
+
+
+    public int abaPosCadastro(Scanner sc){
+
+            int resposta = 0;
+            boolean valido = true;
+            while (valido) {
+                System.out.println("""
+                    1. CADASTRAR OUTRO MÉDICO\
+                    
+                    2. VOLTAR AO MENU DE MÉDICOS \
+                    
+                    0. VOLTAR AO MENU PRINCIPAL""");
+                System.out.print("Selecione uma opção: ");
+                resposta = Integer.parseInt(sc.nextLine());
+                if (resposta != 1 && resposta != 2 && resposta != 0) {
+                    System.out.println("Digite uma opção válida.");
+                } else {
+                    valido = false;
+                }
+            }
+            return resposta;
         }
     }
+
 

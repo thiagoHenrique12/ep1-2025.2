@@ -13,6 +13,6 @@ public class PacienteRepository {
         listaPacientes.add(paciente);
     }
     public List<Pacientes> listarTodos() {
-        return new ArrayList<>(listaPacientes); // devolve cópia
+        return new ArrayList<>(listaPacientes); // devolve uma cópia
     }
 }

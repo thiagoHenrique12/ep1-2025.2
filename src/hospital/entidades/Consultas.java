@@ -5,10 +5,10 @@ public class Consultas {
     private String id;
     private String pacienteId; // ID para referência ao paciente
     private String medicoId;   // ID para referência ao médico
-    private String dataHora;   // Formato: "yyyy-MM-dd HH:mm" - Chave do Conflito
-    private String local;      // Ex: "Consultorio 101" - Chave do Conflit
+    private String dataHora;   // Formato improvisado: "yyyy-MM-dd HH:mm"
+    private String local;      // sala
     private String status;     //
-    private double custoFinal; // Custo após descontos (para Polimorfismo futuro)
+    private double custoFinal; // Custo após descontos aplicar Polimorfismo futuro
 
 
     public Consultas(String id, String pacienteId, String medicoId, String dataHora, String local, String status, double custoFinal) {

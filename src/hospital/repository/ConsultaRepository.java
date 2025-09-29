@@ -14,8 +14,6 @@ public class ConsultaRepository {
         listaConsultas.add(consulta);
     }
 
-
-
     public List<Consultas> listarTodas(){
         return new ArrayList<>(listaConsultas);
     }
