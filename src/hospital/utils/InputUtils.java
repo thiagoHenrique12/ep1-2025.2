@@ -5,6 +5,19 @@ import java.util.Scanner;
 public class InputUtils {
 //    private static Scanner sc = new Scanner(System.in);
 
+    public static int entradaValida (Scanner sc){
+        int entradaValida;
+        do {
+            System.out.print("Selecione uma opção: ");
+            entradaValida = validarInteiro(sc);
+
+            if (entradaValida == -1) {
+                System.out.println("Entrada inválida. Digite apenas números positivos.");
+            }
+        } while (entradaValida == -1);
+        return entradaValida;
+
+    }
     public static int validarInteiro(Scanner sc) {
     //esse método serve para garantir que usuário irá fornecer apenas números
         try {

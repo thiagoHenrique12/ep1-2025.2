@@ -1,8 +1,6 @@
 package hospital.ui;
 
-import hospital.entidades.Paciente;
 import hospital.entidades.PlanoDeSaude;
-import hospital.services.PacienteService;
 import hospital.services.PlanoSaudeService;
 
 import java.util.Scanner;
@@ -21,14 +19,24 @@ public class MenuPlanos {
             System.out.println("2. LISTAR PLANOS EXISTENTES");
             System.out.println("0. SAIR");
             System.out.print("Selecione uma opção: ");
-            op = validarInteiro(sc);
+            int entradaValida;
+            do {
+                System.out.print("Selecione uma opção: ");
+                entradaValida = validarInteiro(sc);
+
+                if (entradaValida == -1) {
+                    System.out.println("Entrada inválida. Digite apenas números.");
+                }
+            } while (entradaValida == -1);
+
+            op = entradaValida;
             switch (op) {
                 case 1:
                     menuCadastrarPlano(sc);
                     break;
                 case 2:
                     System.out.println("AREA PARA LISTAR...");
-                    for (PlanoDeSaude p : planoService.listarTodos()) { //fazer um metodo para isso
+                    for (PlanoDeSaude p : planoService.listarTodos()) { //fazer um metodo para isso e aplicar o tostring
                         System.out.println(p);
                     }
                     break;
@@ -42,7 +50,6 @@ public class MenuPlanos {
     }
 
     public void menuCadastrarPlano(Scanner sc){
-        int resposta = 0;
         System.out.println("======= CADASTRO DE PLANOS ========");
         System.out.print("Digite o nome do plano:");
         String nome = sc.nextLine();

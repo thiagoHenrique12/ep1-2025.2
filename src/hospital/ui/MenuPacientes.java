@@ -1,17 +1,22 @@
 package hospital.ui;
 
 import hospital.entidades.Paciente;
+import hospital.entidades.PlanoDeSaude;
 import hospital.services.PacienteService;
+import hospital.services.PlanoSaudeService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static hospital.services.PacienteService.validarCpf;
+import static hospital.utils.InputUtils.entradaValida;
 import static hospital.utils.InputUtils.validarInteiro;
 
 public class MenuPacientes {
 
     PacienteService pacienteService = new PacienteService();
-
+    PlanoSaudeService planoService = new PlanoSaudeService();
     public void exibirMenu(Scanner sc) {
         int op = -1;
         while (op != 0) {
@@ -47,35 +52,34 @@ public class MenuPacientes {
     }
 
     private int menuCadastrarPaciente(Scanner sc) {
-        int resposta = 0;
-            System.out.println("======= CADASTRO DE PACIENTES ========");
-            System.out.print("Digite o nome do paciente:");
-            String nome = sc.nextLine();
-            int idadeValidada;
-            do {
-                System.out.print("Digite a idade: ");
-                String idade = sc.nextLine();
-                idadeValidada = PacienteService.validarIdade(idade); //validar idade esta incoerente, necessario separar a validação do input
-            }
-            while(idadeValidada < 0);
-            String cpf;
-            do {
-                System.out.println("O CPF deve estar no formato de 11 dígitos seguidos ou no formato xxx.xxx.xxx-xx.");
-                System.out.print("Digite o cpf: ");
-                cpf = sc.nextLine();
-                cpf = validarCpf(cpf);
-                if (cpf == null) {
-                    System.out.println("cpf inválido, tente novamente");
-                }
-            }
-            while (cpf == null);
-
-            pacienteService.adicionarPaciente(nome, cpf, idadeValidada);// aquiiiii
-            System.out.println();
-            return menuPosCadastro(sc);
-
+        System.out.println("======= CADASTRO DE PACIENTES ========");
+        System.out.print("Digite o nome do paciente:");
+        String nome = sc.nextLine();
+        int idadeValidada;
+        do {
+            System.out.print("Digite a idade: ");
+            String idade = sc.nextLine();
+            idadeValidada = PacienteService.validarIdade(idade); //validar idade esta incoerente, necessario separar a validação do input
         }
+        while(idadeValidada < 0);
+        String cpf;
+        do {
+            System.out.println("O CPF deve estar no formato de 11 dígitos seguidos ou no formato xxx.xxx.xxx-xx.");
+            System.out.print("Digite o cpf: ");
+            cpf = sc.nextLine();
+            cpf = validarCpf(cpf);
+            if (cpf == null) {
+                System.out.println("cpf inválido, tente novamente");
+            }
+        }
+        while (cpf == null);
+        verificarPlano(sc);
 
+        pacienteService.adicionarPaciente(nome, cpf, idadeValidada);// aquiiiii
+        System.out.println();
+        return menuPosCadastro(sc);
+
+    }
 
     private int menuPosCadastro(Scanner sc) {
         int resposta = 0;
@@ -96,6 +100,36 @@ public class MenuPacientes {
             }
         }
         return resposta;
+    }
+
+    public PlanoDeSaude verificarPlano(Scanner sc) {
+        System.out.println("O paciente possui plano de saúde?");
+        System.out.println("1. SIM \n2. NÃO");
+        int entrada;
+        do {
+            entrada = entradaValida(sc);
+        } while (entrada != 1 && entrada != 2);
+
+        if (entrada == 1) {       //listando os planos
+            List<PlanoDeSaude> planosDisponiveis = planoService.listarTodos();
+            System.out.println("\n===== SELEÇÃO DE PLANO =====");
+            for (int i = 0; i < planosDisponiveis.size(); i++) {
+                PlanoDeSaude p = planosDisponiveis.get(i);
+                System.out.printf("  %d. %s (Desconto: %.0f%%)\n", i + 1, p.getNome(), p.getDescontoBase() * 100);
+            }
+            int op = -1;
+            do {
+                System.out.println("Digite o plano desejado: ");
+                op = entradaValida(sc);
+                if (op < 1 || op > planosDisponiveis.size()) {
+                    System.out.println("Opção indisponível, digite um número de 1 até " + planosDisponiveis.size());
+                    op = -1;
+                }
+            } while (op == -1);
+            return planosDisponiveis.get(op - 1);// retorna o plano escolhido
+        } else {
+            return null;
+        }
     }
 }
 

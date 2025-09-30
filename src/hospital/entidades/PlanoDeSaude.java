@@ -15,6 +15,9 @@ public class PlanoDeSaude {
         return this.descontoBase;
     }
 
+    public String getNome(){
+        return nome;
+    }
     public String getPlanoId(){       //necessario implementação de um planoId válido
         return this.planoId;
     }
