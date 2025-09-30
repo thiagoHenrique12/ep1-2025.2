@@ -73,10 +73,10 @@ public class MenuPacientes {
             }
         }
         while (cpf == null);
-        verificarPlano(sc);
 
-        pacienteService.adicionarPaciente(nome, cpf, idadeValidada);// aquiiiii
-        System.out.println();
+        PlanoDeSaude plano= verificarPlano(sc);
+        pacienteService.adicionarPaciente(nome, cpf, idadeValidada,plano );
+
         return menuPosCadastro(sc);
 
     }
@@ -108,6 +108,9 @@ public class MenuPacientes {
         int entrada;
         do {
             entrada = entradaValida(sc);
+            if (entrada !=1 && entrada!=2){
+                System.out.println("Escolha entre 1 e 2");
+            }
         } while (entrada != 1 && entrada != 2);
 
         if (entrada == 1) {       //listando os planos
@@ -119,14 +122,13 @@ public class MenuPacientes {
             }
             int op = -1;
             do {
-                System.out.println("Digite o plano desejado: ");
                 op = entradaValida(sc);
                 if (op < 1 || op > planosDisponiveis.size()) {
                     System.out.println("Opção indisponível, digite um número de 1 até " + planosDisponiveis.size());
                     op = -1;
                 }
             } while (op == -1);
-            return planosDisponiveis.get(op - 1);// retorna o plano escolhido
+            return planosDisponiveis.get(op-1);
         } else {
             return null;
         }

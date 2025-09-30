@@ -1,6 +1,8 @@
 package hospital.services;
 
 import hospital.entidades.Paciente;
+import hospital.entidades.PacienteEspecial;
+import hospital.entidades.PlanoDeSaude;
 import hospital.repository.PacienteRepository;
 import hospital.repository.PlanoSaudeRepository;
 
@@ -8,15 +10,23 @@ import java.util.List;
 import java.util.UUID;
 
 public class PacienteService {
-    private final PlanoSaudeRepository planoRepository = new PlanoSaudeRepository();
     private final PacienteRepository repository = new PacienteRepository();
 
 
-    //posteriormente adicionar o id do plano como parâmetro
-    public Paciente adicionarPaciente(String nome, String cpf, int idade){
+    public Paciente adicionarPaciente(String nome, String cpf, int idade,PlanoDeSaude plano){
         String idPaciente = "idP-"+ UUID.randomUUID().toString().substring(0, 8);
 
-        Paciente paciente = new Paciente(idPaciente,nome,cpf, idade); ///// idPlano aqui
+        Paciente paciente;
+        if (plano !=null){
+             paciente = new PacienteEspecial(idPaciente,nome,cpf,idade,plano);
+            System.out.println("Paciente "+nome+", cadastrado com o plano: " +plano.getNome());
+            System.out.println();
+        }
+        else {
+             paciente = new Paciente(idPaciente, nome, cpf, idade);
+            System.out.println("Paciente "+nome+" cadastrado sem plano");
+            System.out.println();
+        }
         repository.salvarPaciente(paciente);
         return paciente;
     }

@@ -9,8 +9,8 @@ public class PlanoDeSaude {
         this.nome=nome;
         this.planoId = PlanoId;
         this.descontoBase=descontoBase;
-        //para evitar problemas atribuí uma de forma do valor do desconto estar entre 0 e 100 %
     }
+
     public double getDescontoBase(){
         return this.descontoBase;
     }
