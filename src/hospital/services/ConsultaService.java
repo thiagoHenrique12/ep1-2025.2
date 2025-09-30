@@ -27,7 +27,6 @@ public class ConsultaService {
             return null;
         }
 
-        // 2. Lógica de Criação:
         double custoFinal = custoBaseMedico; // Polimorfismo futuro, necessario melhorar a parte de médicos
         String id = "C-" + UUID.randomUUID().toString().substring(0, 8);
 
@@ -49,7 +48,7 @@ public class ConsultaService {
             if (existente.getMedicoId().equals(novoMedicoId) &&
                     existente.getDataHora().equals(novaDataHora)) {
 
-                System.err.println("Conflito: Médico " + novoMedicoId + " já está agendado.");
+                System.err.println("Conflito: Médico " + novoMedicoId + " já está agendado nesse horário.");
                 return true;
             }
 
@@ -58,7 +57,7 @@ public class ConsultaService {
                     existente.getDataHora().equals(novaDataHora)) {
 
                 System.err.println("Conflito: Local " + novoLocal + " já está reservado para esse horário.");
-                return true;
+                return true; // ambos os true acima indicam um retorno de que existe conflito
             }
         }
         return false; //esse falso está indicando que nenhum conflito foi encontrado

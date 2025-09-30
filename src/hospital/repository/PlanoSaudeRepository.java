@@ -25,4 +25,12 @@ public class PlanoSaudeRepository {
     public List<PlanoDeSaude> listarTodos() {
         return new ArrayList<>(listaPlanos); // vai retorna uma cópia
     }
+
+    public PlanoDeSaude buscarPlanoPorId (String idPlano){
+        return listaPlanos.stream().filter(p -> p.getPlanoId().equals(idPlano))
+                .findFirst().orElse(null);
+        //CONCEITO IMPORTANTE, pesquisar mais sobre
+        /*esse filtro está buscando o primeiro Plano que possuir um id igual ao parametro,
+        se nao achar vai retornar o container Optional<> null  */
+    }
 }

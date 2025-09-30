@@ -1,6 +1,7 @@
 package hospital.repository;
 
 import hospital.entidades.Paciente;
+import hospital.entidades.PlanoDeSaude;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,10 @@ public class PacienteRepository {
     public void salvarPaciente(Paciente paciente){
         listaPacientes.add(paciente);
     }
+
     public List<Paciente> listarTodos() {
         return new ArrayList<>(listaPacientes); // devolve uma cópia
     }
+
+
 }
