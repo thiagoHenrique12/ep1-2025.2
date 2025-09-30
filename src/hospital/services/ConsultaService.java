@@ -13,66 +13,6 @@ public class ConsultaService {
 
 
 
-    // teste improvisado para validar as aplicações
-    public void iniciarTestes() {
-        System.out.println("testando");
-
-        // valores ficticios apenas para teste
-        String p1 = "P-id_paciente1";
-        String m1 = "M-id_médico1";
-        String m2 = "M-id_médico2";
-        String s1 = "sala. 101";
-        String s2 = "sala. 13";
-        double custo = 150.00;
-
-        String horarioConflito = "2025-11-01 15:00";
-
-        System.out.println("agendando consulta1....");
-        Consulta base = agendarConsulta(p1, m1, horarioConflito, s1, custo);
-
-        if (base != null) {
-            System.out.println("agendada com sucesso. Total Ativas: " + consultaRepository.listarTodasAtivas().size());
-        }
-
-
-        // testando o conflito de horario para médico ocupado
-        System.out.println(" Teste: Médico Ocupado ");
-        Consulta conflitoMedico = agendarConsulta(
-                "Paciente-2", m1, horarioConflito, s2, custo // Mesmo Médico (m1), Mesmo Horário
-        );
-        if (conflitoMedico == null) {
-            System.out.println("conflito de Médico/Horário detectado! (deu certo)");// mensagem esperada para confirmar que o programa esta certo
-        } else {
-            System.out.println(" o agendamento deveria ter falahdo.");
-        }
-
-
-        System.out.println("testando se o local vai estar ocupado");
-        Consulta conflitoLocal = agendarConsulta(
-                "P-3", m2, horarioConflito, s1, custo // Mesmo Local (s1), outro Médico (m2)
-        );
-        if (conflitoLocal == null) {
-            System.out.println(" Conflito de Local/Horário detectado (deu certo"); //essa mensagem é a esperada para caso o programa esteja correto
-        } else {
-            System.out.println(" Agendamento deveria falhar.");
-        }
-
-        System.out.println("testandi horário Livre");
-        Consulta livre = agendarConsulta(
-                "P-4", m2, "2025-11-01 16:00", s2, custo // Tudo diferente dessa vez
-        );
-        if (livre != null) {
-            System.out.println("agendamento Livre efetuado com sucesso.");
-        }
-
-        System.out.println("Total de consultas ativas final: " + consultaRepository.listarTodasAtivas().size());
-        System.out.println("--- TESTE CONCLUÍDO ---");
-    }
-
-
-
-
-
 
     public Consulta agendarConsulta(
             String pacienteId,

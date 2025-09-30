@@ -2,11 +2,11 @@ package hospital.ui;
 
 import hospital.entidades.Paciente;
 import hospital.services.PacienteService;
-import hospital.services.PessoaService;
+
 
 import java.util.Scanner;
 
-import static hospital.services.PessoaService.validarCpf;
+import static hospital.services.PacienteService.validarCpf;
 import static hospital.utils.InputUtils.validarInteiro;
 
 public class MenuPacientes {
@@ -56,7 +56,7 @@ public class MenuPacientes {
             do {
                 System.out.print("Digite a idade: ");
                 String idade = sc.nextLine();
-                idadeValidada = PessoaService.validarIdade(idade); //validar idade esta incoerente, necessario separar a validação do input
+                idadeValidada = PacienteService.validarIdade(idade); //validar idade esta incoerente, necessario separar a validação do input
             }
             while(idadeValidada < 0);
             String cpf;
@@ -71,7 +71,7 @@ public class MenuPacientes {
             }
             while (cpf == null);
 
-            pacienteService.adicionarPaciente(nome, cpf, idadeValidada);
+            pacienteService.adicionarPaciente(nome, cpf, idadeValidada);// aquiiiii
             System.out.println();
             return menuPosCadastro(sc);
 

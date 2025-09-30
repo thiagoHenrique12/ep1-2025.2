@@ -20,7 +20,7 @@ public class PacienteEspecial extends Paciente {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + ";" + this.plano.getId();
+    public String toString() { // ainda é necessário melhoras a apresentação de dados no toString
+        return super.toString() + ";" + this.plano.getPlanoId();
     }
 }

@@ -31,10 +31,7 @@ public class MenuMedicos {
                 case 2:
                     break;
                 case 3:
-                    // aqui chamaremos o teste improvisado
-                    ConsultaService scTeste = new ConsultaService();
-                    scTeste.iniciarTestes();
-                    break;
+
                 case 0:
                     System.out.println("saindo...");
                     break;
