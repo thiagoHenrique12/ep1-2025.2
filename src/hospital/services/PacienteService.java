@@ -14,7 +14,7 @@ public class PacienteService {
 
     //posteriormente adicionar o id do plano como parâmetro
     public Paciente adicionarPaciente(String nome, String cpf, int idade){
-        String idPaciente = "P-"+ UUID.randomUUID().toString().substring(0, 8);
+        String idPaciente = "idP-"+ UUID.randomUUID().toString().substring(0, 8);
 
         Paciente paciente = new Paciente(idPaciente,nome,cpf, idade); ///// idPlano aqui
         repository.salvarPaciente(paciente);
