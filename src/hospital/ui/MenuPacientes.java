@@ -3,7 +3,6 @@ package hospital.ui;
 import hospital.entidades.Paciente;
 import hospital.services.PacienteService;
 
-
 import java.util.Scanner;
 
 import static hospital.services.PacienteService.validarCpf;

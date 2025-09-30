@@ -7,9 +7,9 @@ public class Menu {
     /* optei por fazer um Scanner sendo final, assim será evitado duplicação e haverá um único fechamento
     com sc.close para esse scanner, evitando possíveis erros e quebras na aplicação
      */
-
     private final MenuPacientes menuPacientes = new MenuPacientes();
     private final MenuMedicos menuMedicos = new MenuMedicos();
+    private final MenuPlanos menuPlanos = new MenuPlanos();
 
     public void iniciar() {
 
@@ -19,6 +19,7 @@ public class Menu {
             System.out.println("1. PACIENTES");
             System.out.println("2. MÉDICOS");
             System.out.println("3. CONSULTAS");
+            System.out.println("4. PLANOS");
             System.out.println("0. SAIR");
             try {
                 System.out.print("Selecione uma opção: ");
@@ -34,8 +35,8 @@ public class Menu {
                 case 2:
                     menuMedicos.exibirMenu(sc);
                     break;
-                case 3:
-
+                case 4:
+                    menuPlanos.exibirMenu(sc);
                     break;
                 case 0:
                     System.out.println("Finalizando o sistema ...");

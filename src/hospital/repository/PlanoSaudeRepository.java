@@ -13,9 +13,9 @@ public class PlanoSaudeRepository {
     }
 
     private void carregarPlanosIniciais() {
-        // método básico para testes com valores pre definidos
-        listaPlanos.add(new PlanoDeSaude("PL01", "Id-Plano Básico", 0.20));
-        listaPlanos.add(new PlanoDeSaude("PL02", "Id-Plano Premium", 0.40));
+        // esses planos são planos iniciais que ja estão contidos no sistema
+        listaPlanos.add(new PlanoDeSaude("Plano Básico", "Id-Plano Básico", 0.20));
+        listaPlanos.add(new PlanoDeSaude("Plano Premium", "Id-Plano Premium", 0.40));
     }
 
     public void salvarPlano(PlanoDeSaude plano){
