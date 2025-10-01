@@ -9,7 +9,7 @@ import static hospital.utils.InputUtils.lerPorcentagem;
 import static hospital.utils.InputUtils.validarInteiro;
 
 public class MenuPlanos {
-    PlanoSaudeService planoService = new PlanoSaudeService();
+    private final PlanoSaudeService planoService = new PlanoSaudeService();
 
     public void exibirMenu(Scanner sc ){
         int op = -1;

@@ -4,13 +4,12 @@ import hospital.entidades.Paciente;
 import hospital.entidades.PacienteEspecial;
 import hospital.entidades.PlanoDeSaude;
 import hospital.repository.PacienteRepository;
-import hospital.repository.PlanoSaudeRepository;
 
 import java.util.List;
 import java.util.UUID;
 
 public class PacienteService {
-    private final PacienteRepository repository = new PacienteRepository();
+    private final PacienteRepository pacienteRepository = PacienteRepository.getInstance();
 
 
     public Paciente adicionarPaciente(String nome, String cpf, int idade,PlanoDeSaude plano){
@@ -27,7 +26,7 @@ public class PacienteService {
             System.out.println("Paciente "+nome+" cadastrado sem plano");
             System.out.println();
         }
-        repository.salvarPaciente(paciente);
+        pacienteRepository.salvarPaciente(paciente);
         return paciente;
     }
 
@@ -67,9 +66,9 @@ public class PacienteService {
     }
 
     public Paciente buscarPorId(String id){
-        return repository.buscarPorId(id);
+        return pacienteRepository.buscarPorId(id);
     }
     public List<Paciente> listarPacientes() {
-        return repository.listarTodos();
+        return pacienteRepository.listarTodos();
     }
 }

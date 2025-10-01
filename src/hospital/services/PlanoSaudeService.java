@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class PlanoSaudeService {
-    PlanoSaudeRepository planoRepository = new PlanoSaudeRepository();
+    private final PlanoSaudeRepository planoRepository = PlanoSaudeRepository.getInstance();
 
 
     public PlanoDeSaude cadastrarPlano (String nome, double desconto){
@@ -24,7 +24,7 @@ public class PlanoSaudeService {
         return planoRepository.listarTodos();
     }
 
-    //segue a mesma logica do metodo acima
+    //segue a mesma lógica do metodo acima
     public PlanoDeSaude buscarPlanoPorId(String idPlano){
         return planoRepository.buscarPorId(idPlano);
     }

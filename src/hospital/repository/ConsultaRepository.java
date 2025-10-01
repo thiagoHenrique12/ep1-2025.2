@@ -7,9 +7,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ConsultaRepository {
-
+    private static final ConsultaRepository instance = new ConsultaRepository();
     private final List<Consulta> listaConsultas= new ArrayList<>();
 
+    private ConsultaRepository(){
+
+    }
+
+    public static ConsultaRepository getInstance(){
+        return instance;
+    }
     public void salvarConsulta(Consulta consulta){
         listaConsultas.add(consulta);
     }

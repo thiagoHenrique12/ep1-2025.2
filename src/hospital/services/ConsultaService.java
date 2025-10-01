@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class ConsultaService {
-    private final ConsultaRepository consultaRepository = new ConsultaRepository();
-    private final PacienteService pacienteRepository = new PacienteService();
+    private final ConsultaRepository consultaRepository = ConsultaRepository.getInstance();
+    private final PacienteService pacienteService = new PacienteService();
 
     public Consulta agendarConsulta(
             String pacienteId,
@@ -23,7 +23,7 @@ public class ConsultaService {
             return null;
         }
         // buscando o paciente
-        Paciente paciente = pacienteRepository.buscarPorId(pacienteId);
+        Paciente paciente = pacienteService.buscarPorId(pacienteId);
         if (paciente ==null){
             System.out.println("Nenhum paciente foi encontrado para o id fornecido");
             return null;

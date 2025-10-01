@@ -6,10 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlanoSaudeRepository {
-    private final List<PlanoDeSaude> listaPlanos = new ArrayList<>();
 
-    public PlanoSaudeRepository(){
+    private final List<PlanoDeSaude> listaPlanos = new ArrayList<>();
+    private static final PlanoSaudeRepository instance = new PlanoSaudeRepository(); /*criando uma instância UNICA para o código
+     inteiro, isso vai impedir que ao criar uma instância os dados cadastrados sejam resetados */
+
+    //virou para private para assegurar que o construtor seja chamado em outro lugar
+    private PlanoSaudeRepository(){
         carregarPlanosIniciais();
+    }
+
+    public static PlanoSaudeRepository getInstance(){
+        return instance;
     }
 
     private void carregarPlanosIniciais() {

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class MedicoService {
     private final List<Medico> listaMedicos = new ArrayList<>();
-    private final MedicoRepository medicoRepository= new MedicoRepository();
+    private final MedicoRepository medicoRepository= MedicoRepository.getInstance();
 
     public void cadastrarMedico(String nome, String crm, String especialidade){
         String id = "M-" + UUID.randomUUID().toString().substring(0, 8);
