@@ -3,8 +3,8 @@ package hospital.entidades;
 
 public class Consulta {
     private String id;
-    private String pacienteId; // ID para referência ao paciente
-    private String medicoId;   // ID para referência ao médico
+    private String pacienteId;
+    private String medicoId;
     private String dataHora;   // Formato improvisado: "yyyy-MM-dd HH:mm"
     private String local;      // sala
     private String status;     //

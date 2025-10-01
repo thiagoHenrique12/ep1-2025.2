@@ -12,15 +12,15 @@ public class PacienteEspecial extends Paciente {
     }
     @Override
     public double calcularCustoConsulta(double custoBase){
-        double custoComDescontoIdade = super.calcularCustoConsulta(custoBase);
+        double custoComDescontoIdade = super.calcularCustoConsulta(custoBase);/*aqui volta na classe mãe para ver se
+                                                                               se aplica*/
+        double descontoPlano =  this.plano.getDescontoBase(); //pegando o desconto que o plano oferece
 
-        double descontoPlano =  this.plano.getDescontoBase();
-
-        return custoComDescontoIdade *(1 - descontoPlano);
+        return custoComDescontoIdade * descontoPlano; // juntando descontos e retornando
     }
 
     @Override
-    public String toString() { // ainda é necessário melhoras a apresentação de dados no toString
+    public String toString() { // ainda é necessário melhorar a apresentação de dados no toString
         return super.toString() + ";" + this.plano.getPlanoId();
     }
 }

@@ -63,10 +63,12 @@ public class PacienteService {
         }
 
         //caso esteja formatado, remove a pontuação para padronizar
-        String cpfNumerico = cpf.replaceAll("\\D", "");
-        return cpfNumerico;
+        return cpf.replaceAll("\\D", "");
     }
 
+    public Paciente buscarPorId(String id){
+        return repository.buscarPorId(id);
+    }
     public List<Paciente> listarPacientes() {
         return repository.listarTodos();
     }

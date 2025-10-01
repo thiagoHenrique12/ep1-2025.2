@@ -24,8 +24,8 @@ public class PlanoSaudeService {
         return planoRepository.listarTodos();
     }
 
-    //segue a mesma logica do método acima
+    //segue a mesma logica do metodo acima
     public PlanoDeSaude buscarPlanoPorId(String idPlano){
-        return planoRepository.buscarPlanoPorId(idPlano);
+        return planoRepository.buscarPorId(idPlano);
     }
 }

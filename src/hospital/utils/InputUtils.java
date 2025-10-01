@@ -3,8 +3,6 @@ package hospital.utils;
 import java.util.Scanner;
 
 public class InputUtils {
-//    private static Scanner sc = new Scanner(System.in);
-
     public static int entradaValida (Scanner sc){
         int entradaValida;
         do {
