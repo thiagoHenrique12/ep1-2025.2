@@ -40,41 +40,58 @@ public class MenuMedicos {
             }
         }
     }
+
     public int menuCadastrarMedico(Scanner sc){
         System.out.println("=== CADASTRANDO MÉDICO ===");
         System.out.print("Digite o nome: ");
         String nome = sc.nextLine();
         String crm;
         do {
-            System.out.print("Digite o CRM (apenas números): ");
+            System.out.print("Digite o CRM ( 5 dígitos numéricos): ");
             crm = sc.nextLine();
-            if (validarCrm(crm)) {
+            if (medicoService.validarCrm(crm)) {
                 System.out.println("CRM inválido. Deve conter 5 dígitos numéricos.");
             }
-        } while (validarCrm(crm));
+        } while (medicoService.validarCrm(crm));
 
         String especialidade= abaEspecialidades(sc);
         System.out.println();
-        System.out.println("Digite o horário do início do expediente: ");
-        String horarioInicio =sc.nextLine();
-        validarHorario(horarioInicio);  // necessário ainda implementar lógica para valores validos de horario
+        String horarioInicio;
+        System.out.println("Digite os horários no formato: XX:XX");
+        do {
+            System.out.print("Digite o horário do início do expediente: ");
+            horarioInicio = sc.nextLine();
+            horarioInicio=medicoService.validarHorario(horarioInicio);
+        }
+        while (horarioInicio == null);
+
+
+        String horarioFinal;
+        do {
+            System.out.print("Digite o horário de término do expediente: ");
+            horarioFinal =sc.nextLine();
+            horarioFinal = medicoService.validarHorario(horarioFinal);
+
+            if (horarioFinal!= null){
+                String[] partesI = horarioInicio.split(":");
+                String[] partesF = horarioFinal.split(":");
+                if (Integer.parseInt(partesI[0]) > Integer.parseInt(partesF[0])){ //conferindo se as horas do horario final vem depois do horário inicial
+                    System.out.println("Horário inválido, expediente começando às "+horarioInicio);
+                    horarioFinal = null;
+                }
+                if (Integer.parseInt(partesI[0]) == Integer.parseInt(partesF[0]) && Integer.parseInt(partesI[1]) >= Integer.parseInt(partesF[0])){
+                    System.out.println("Horário inválido, expediente começando às "+horarioInicio);
+                    horarioFinal = null;
+                }
+            }
+        }
+        while (horarioFinal ==null);
+
+
         return abaPosCadastro(sc);
     }
 
 
-    public boolean validarCrm(String crm) {
-        if (crm == null) {
-            return true; // esse true serve para ficar no looping while enquanto o crm for null
-        }
-        return !crm.matches("\\d{5}");
-    }
-
-    public boolean validarHorario(String horario){
-        if (horario == null){
-            return true;
-        }
-        return !horario.matches("\\d{2}:\\d{2}");
-    }
 
     public String abaEspecialidades(Scanner sc){
         String especialidade;

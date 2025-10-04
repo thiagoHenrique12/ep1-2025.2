@@ -19,6 +19,7 @@ public class MedicoService {
         medicoRepository.salvarMedico(medico);
         System.out.println("Médico cadastrado com sucesso!");
     }
+
     public String validarEspecialidade(int op){
         String especialidade;
         especialidade = switch (op) {
@@ -35,7 +36,35 @@ public class MedicoService {
         return especialidade;
     }
 
-    public List<Medico> listarMedicos(){
-        return listaMedicos;
+    public boolean validarCrm(String crm) {
+        if (crm == null) {
+            return true; // esse true serve para ficar no looping while enquanto o crm for null
+        }
+        return !crm.matches("\\d{5}");
     }
+
+    public String validarHorario(String horario){
+        if (horario == null || !horario.matches("\\d{2}:\\d{2}")){
+            System.out.println("Formato de horário inválido");
+            return null;
+        }
+        try {// separando as horas dos minutos
+            String[] partes = horario.split(":");
+            int horas = Integer.parseInt(partes[0]);
+            int minutos = Integer.parseInt(partes[1]);
+
+            if ( horas <0 || horas > 23 || minutos < 0 || minutos>59){
+                System.out.println("Valores inválidos, digite um horário entre 00:00 e 23:59");
+                return null;
+            }
+            return horario;
+        }
+        catch (NumberFormatException e){
+            System.out.println("Erro, digite novamente"); // camada extra para o programa não parar
+            return null;
+        }
+    }
+
+  // refazer o listarMedicos
+
 }
