@@ -30,6 +30,7 @@ public class PacienteService {
         return paciente;
     }
 
+
     public static int validarIdade(String idade){
         try {
             int idadeValidada= Integer.parseInt(idade);
@@ -68,6 +69,7 @@ public class PacienteService {
     public Paciente buscarPorId(String id){
         return pacienteRepository.buscarPorId(id);
     }
+
     public List<Paciente> listarPacientes() {
         return pacienteRepository.listarTodos();
     }

@@ -65,6 +65,9 @@ public class MedicoService {
         }
     }
 
-  // refazer o listarMedicos
+    public List<Medico> listarMedicos(){
+        return medicoRepository.listarTodos();
+    }
+
 
 }

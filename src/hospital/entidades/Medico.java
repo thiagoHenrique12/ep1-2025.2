@@ -26,6 +26,10 @@ public class Medico {
         this.horarioFimTrabalho = horarioFimTrabalho;
     }
 
+    public double getValorDaConsulta() {
+        return valorDaConsulta;
+    }
+
     public String getId(){
         return id;
     }
@@ -40,5 +44,13 @@ public class Medico {
 
     public String toString() {
     return nome +";"+crm+";"+especialidade+";"+id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCrm() {
+        return crm;
     }
 }

@@ -14,10 +14,12 @@ public class MedicoRepository {
     }
     public static MedicoRepository getInstance(){
         return instance;
+
     }
     public void salvarMedico(Medico medico){
         listaMedicos.add(medico);
     }
+
     public List<Medico> listarTodos() {
         return new ArrayList<>(listaMedicos);
     }

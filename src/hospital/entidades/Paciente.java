@@ -16,9 +16,19 @@ public class Paciente {
         this.id = id;
         this.idade= idade;
     }
+
+    public String getNome(){
+        return nome;
+    }
+
     public String getId(){
         return id;
     }
+
+    public String getCpf (){
+        return cpf;
+    }
+
     public double calcularCustoConsulta(double custoBase){
         double descontoIdade = 0;
         if (this.idade>= 60){

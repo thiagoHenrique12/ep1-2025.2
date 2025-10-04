@@ -10,7 +10,7 @@ public class Menu {
     private final MenuPacientes menuPacientes = new MenuPacientes();
     private final MenuMedicos menuMedicos = new MenuMedicos();
     private final MenuPlanos menuPlanos = new MenuPlanos();
-
+    private final MenuConsultas menuConsultas=new MenuConsultas();
     public void iniciar() {
 
         int op = -1;
@@ -35,6 +35,8 @@ public class Menu {
                 case 2:
                     menuMedicos.exibirMenu(sc);
                     break;
+                case 3:
+                    menuConsultas.exibirMenu(sc);
                 case 4:
                     menuPlanos.exibirMenu(sc);
                     break;
