@@ -10,7 +10,7 @@ public class InputUtils {
             entradaValida = validarInteiro(sc);
 
             if (entradaValida == -1) {
-                System.out.println("Entrada inválida. Digite apenas números positivos.");
+                System.out.println("Entrada inválida. Tente novamente");
             }
         } while (entradaValida == -1);
         return entradaValida;

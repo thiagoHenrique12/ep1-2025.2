@@ -27,7 +27,7 @@ public class ConsultaService {
         }
         // buscando o paciente
         Paciente paciente = pacienteService.buscarPorId(pacienteId);
-        if (paciente ==null){
+        if (paciente == null) {
             System.out.println("Nenhum paciente foi encontrado para o id fornecido");
             return null;
         }
@@ -101,20 +101,45 @@ public class ConsultaService {
         }
     }
 
-    public List<String> listarHorariosLivres (Medico medico, String data ){
+    public List<String> listarHorariosLivres(Medico medico, String data) {
         List<String> todosSlots = gerarGradeHorarios(medico, data);
 
         List<Consulta> consultasAtivas = consultaRepository.listarTodasAtivas();
 
         List<String> horariosOcupados = consultasAtivas.stream().filter(c -> c.getMedicoId().equals(medico.getId()) &&
-                c.getDataHora().startsWith(data)).map(Consulta :: getDataHora).toList();
+                c.getDataHora().startsWith(data)).map(Consulta::getDataHora).toList();
         /*esse filtro serve para manter apenas aas consultas que pertencem ao médico desejado e as consultas que
         possuem o começo do atributo dataHora igual à data desejada. Para cada consulta o map extrai os valores de dataHora
          */
         todosSlots.removeAll(horariosOcupados);
         return todosSlots;
+
     }
 
+    public String validarData(String data) {
+        String regex = "\\d{4}-\\d{2}-\\d{2}";
+        if (!data.matches(regex)) {
+            System.out.println("Formato inválido de data, siga exatamente o modelo e use apenas dígitos");
+            return null;
+        }
+        return data;
+    }
+
+    private static final List<String> salas = List.of(
+            "Consultório 101",
+            "Consultório 102",
+            "Consultório 103",
+            "Consultório 205",
+            "Sala de Exames A",
+            "Sala de Exames B",
+            "Sala 301",
+            "Sala 302",
+            "Bloco Cirúrgico 501",
+            "Consultório 502 ");
+
+
+    public List<String> listarSalasDisponiveis() {
+        return salas;
+
+    }
 }
-
-

@@ -5,10 +5,11 @@ import hospital.entidades.Paciente;
 import hospital.services.ConsultaService;
 import hospital.services.MedicoService;
 import hospital.services.PacienteService;
-import hospital.utils.InputUtils;
 
 import java.util.List;
 import java.util.Scanner;
+
+import static hospital.utils.InputUtils.entradaValida;
 
 public class MenuConsultas{
     private final ConsultaService consultaService = new ConsultaService();
@@ -22,8 +23,7 @@ public class MenuConsultas{
             System.out.println("1. AGENDAR NOVA CONSULTA");
             System.out.println("2. LISTAR CONSULTAS FUTURAS");
             System.out.println("0. VOLTAR");
-            System.out.print("Selecione uma opção: ");
-            op = InputUtils.entradaValida(sc);
+            op = entradaValida(sc);
 
             switch (op) {
                 case 1:
@@ -44,66 +44,75 @@ public class MenuConsultas{
     private void menuAgendarConsulta(Scanner sc) {
         System.out.println("\n===== AGENDAMENTO DE CONSULTA =====");
         Paciente paciente = selecionarPaciente(sc); // implementar looping para casos gerais de entradas erradas
-
+        if(paciente == null) {
+            System.out.println("Não foi possível concluir esse agendamento");
+            return;
+        }
         Medico medico = selecionarMedico(sc);
+        if(medico == null){
+            System.out.println("Não foi possível concluir esse agendamento");
+            return;
+        }
+        String data; // IMPLEMENTAÇÃO: ainda é necessário criar uma forma de validar cada componete da data
+        do {
+            System.out.print("\nDigite a data da consulta (AAAA-MM-DD): ");
+            data = sc.nextLine();
+            data = consultaService.validarData(data);
+        }
+        while (data ==null);
 
-
-        System.out.print("Digite a data da consulta (AAAA-MM-DD): "); // fazer um metodo de validação de data
-        String data = sc.nextLine();
-
-        System.out.print("Digite o local/consultório: "); // implementar uma lista de salas futuramente disponíveis
-        String local = sc.nextLine();
-
+        String local = selecionarLocal(sc);
 
         String horarioEscolhido = selecionarHorario(sc, medico, data);
 
-        // OBS: Você precisa garantir que o PacienteService e MedicoService tenham buscarPorId
-        // e que Medico tenha o getter para valorDaConsulta.
-
-        assert medico != null;
         double custoBase = medico.getValorDaConsulta();
 
-        assert paciente != null;
         consultaService.agendarConsulta(paciente.getId(), medico.getId(),
                 data + " " + horarioEscolhido, local, custoBase);
 
-        System.out.println("Consulta agendada com sucesso para " + paciente.getNome() + ".");
     }
 
 
 
     private Paciente selecionarPaciente(Scanner sc) {
-        System.out.println("===== SELEÇÃO DE PACIENTE =====");
+        System.out.println("\n===== SELEÇÃO DE PACIENTE =====");
         List<Paciente> lista = pacienteService.listarPacientes();
 
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.printf("%d. %s (CPF: %s)\n", i + 1, lista.get(i).getNome(), lista.get(i).getCpf());
+        if (lista.isEmpty()) {
+            System.out.println("Nenhum paciente cadastrado no sistema...");
         }
+        else {
+            for (int i = 0; i < lista.size(); i++) {
+                System.out.printf("%d. %s (CPF: %s)\n", i + 1, lista.get(i).getNome(), lista.get(i).getCpf());
+            }
 
-        System.out.print("Escolha o número do paciente: ");  //fazer caso para quando não houver paciente
-        int op = InputUtils.entradaValida(sc);
+            int op = entradaValida(sc);
 
-        if (op > 0 && op <= lista.size()) {
-            return lista.get(op - 1);
+            if (op > 0 && op <= lista.size()) {
+                return lista.get(op - 1);
+            }
+            System.out.println("Paciente não encontrado.");
         }
-        System.out.println("Paciente não encontrado.");
         return null;
     }
 
     private Medico selecionarMedico(Scanner sc) {
-        System.out.println("===== SELEÇÃO DE MÉDICO =====");
+        System.out.println("\n===== SELEÇÃO DE MÉDICO =====");
         List<Medico> lista = medicoService.listarMedicos();
 
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.printf("%d. %s (CRM: %s)\n", i + 1, lista.get(i).getNome(), lista.get(i).getCrm());
-        }
-        System.out.print("Escolha o número do médico: ");
-        int op = InputUtils.entradaValida(sc);
+        if (lista.isEmpty()) {
+            System.out.println("Nenhum médico cadastrado no sistema...");
+        } else {
+            for (int i = 0; i < lista.size(); i++) {
+                System.out.printf("%d. %s (CRM: %s)\n", i + 1, lista.get(i).getNome(), lista.get(i).getCrm());
+            }
+            int op = entradaValida(sc);
 
-        if (op > 0 && op <= lista.size()) {
-            return lista.get(op - 1);
+            if (op > 0 && op <= lista.size()) {
+                return lista.get(op - 1);
+            }
+            System.out.println("Médico não encontrado...");
         }
-        System.out.println("Médico não encontrado.");
         return null;
     }
 
@@ -127,10 +136,30 @@ public class MenuConsultas{
         int op;
         do {
             System.out.println("Digite o número do horário desejado ");
-            op = InputUtils.entradaValida(sc);
+            op = entradaValida(sc);
         } while (op < 1 || op > horariosLivresComData.size());
 
         // vai retornar o slot COMPLETO (com data e hora) para o agendarConsulta
         return horariosLivresComData.get(op - 1);
+    }
+
+    public String selecionarLocal(Scanner sc){
+        List<String> salas = consultaService.listarSalasDisponiveis();
+        System.out.println("\n===== SELEÇÃO DE LOCAL =====");
+
+        for( int i= 0; i< salas.size(); i++){
+            System.out.printf(" %d. %s\n",i+1, salas.get(i));
+        }
+        int op;
+        do {
+            op = entradaValida(sc);
+            if (op < 1 || op > salas.size()){
+                System.out.println("Digite um valor entre 1 e "+salas.size());
+            }
+        }
+        while (op < 1 || op > salas.size());
+        String salaEscolhida = salas.get((op-1));
+        System.out.println("Local escolhido: "+salaEscolhida);
+        return salaEscolhida;
     }
 }

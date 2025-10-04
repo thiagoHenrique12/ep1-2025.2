@@ -59,14 +59,14 @@ public class MenuMedicos {
         System.out.println();
         double preco;
         do {
-            System.out.print("Digite o preço da consulta:");
+            System.out.print("Digite o preço da consulta: R$");
             preco = validarDouble(sc);
             if(preco < 0) System.out.println("Preço inválido, tente novamente");
         }
         while (preco < 0);
 
         String horarioInicio;
-        System.out.println("Digite os horários no formato: XX:XX");
+        System.out.println("\nDigite todos os horários no formato: XX:XX");
         do {
             System.out.print("Digite o horário do início do expediente: ");
             horarioInicio = sc.nextLine();
@@ -95,8 +95,9 @@ public class MenuMedicos {
             }
         }
         while (horarioFinal ==null);
-
+        System.out.println();
         medicoService.cadastrarMedico(nome,crm, especialidade, preco, horarioInicio, horarioFinal);
+        System.out.println();
 
         return abaPosCadastro(sc);
     }

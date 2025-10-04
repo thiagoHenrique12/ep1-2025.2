@@ -37,6 +37,7 @@ public class Menu {
                     break;
                 case 3:
                     menuConsultas.exibirMenu(sc);
+                    break;
                 case 4:
                     menuPlanos.exibirMenu(sc);
                     break;
