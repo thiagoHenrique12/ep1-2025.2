@@ -1,9 +1,11 @@
 package hospital.services;
 
+import hospital.entidades.Medico;
 import hospital.entidades.Consulta;
 import hospital.entidades.Paciente;
 import hospital.repository.ConsultaRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -63,6 +65,45 @@ public class ConsultaService {
         }
         return false; //esse falso está indicando que nenhum conflito foi encontrado
     }
+
+
+    public List<String> gerarGradeHorarios(Medico medico, String data, int intervaloMinutos) {
+        List<String> todosSlots = new ArrayList<>();
+
+        int inicioMinutos = converterParaMinutos(medico.getHorarioInicioTrabalho());
+
+        int fimMinutos = converterParaMinutos(medico.getHorarioFimTrabalho());
+
+        int minutosAtuais = inicioMinutos;
+
+        // Loop para criar slots de consulta a cada 30 minutos
+        while (minutosAtuais < fimMinutos) {
+
+            int h = minutosAtuais / 60;
+            int m = minutosAtuais % 60;
+            String horario = String.format("%02d:%02d", h, m);
+
+            // Adiciona formatado: "AAAA-MM-DD HH:mm"
+            todosSlots.add(data + " " + horario);
+
+            minutosAtuais += intervaloMinutos; // Avança para o próximo slot
+        }
+
+        return todosSlots;
+    }
+
+    // método para converter HH:mm para minutos totais
+    private int converterParaMinutos(String horarioHHMM) {
+        try {
+            String[] partes = horarioHHMM.split(":");
+            int horas = Integer.parseInt(partes[0]);
+            int minutos = Integer.parseInt(partes[1]);
+            return horas * 60 + minutos;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
 }
 
 

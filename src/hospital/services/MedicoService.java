@@ -11,9 +11,11 @@ public class MedicoService {
     private final List<Medico> listaMedicos = new ArrayList<>();
     private final MedicoRepository medicoRepository= MedicoRepository.getInstance();
 
-    public void cadastrarMedico(String nome, String crm, String especialidade){
+    public void cadastrarMedico(String nome, String crm, String especialidade, double valorDaConsulta,
+            String horarioInicioTrabalho, String horarioFimTrabalho){
+
         String id = "M-" + UUID.randomUUID().toString().substring(0, 8);
-        Medico medico = new Medico(nome, crm, especialidade, id);
+        Medico medico = new Medico(nome, crm, especialidade, id, valorDaConsulta,horarioInicioTrabalho,horarioFimTrabalho);
         medicoRepository.salvarMedico(medico);
         System.out.println("Médico cadastrado com sucesso!");
     }

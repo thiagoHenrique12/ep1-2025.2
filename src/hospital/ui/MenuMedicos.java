@@ -53,14 +53,27 @@ public class MenuMedicos {
             }
         } while (validarCrm(crm));
 
-        String especialidade= abaEspecialidades(sc); //mudanças feitas aqui
+        String especialidade= abaEspecialidades(sc);
         System.out.println();
+        System.out.println("Digite o horário do início do expediente: ");
+        String horarioInicio =sc.nextLine();
+        validarHorario(horarioInicio);  // necessário ainda implementar lógica para valores validos de horario
         return abaPosCadastro(sc);
     }
 
+
     public boolean validarCrm(String crm) {
-        if (crm == null) return true; // esse true serve para ficar no looping while enquanto o crm for null
+        if (crm == null) {
+            return true; // esse true serve para ficar no looping while enquanto o crm for null
+        }
         return !crm.matches("\\d{5}");
+    }
+
+    public boolean validarHorario(String horario){
+        if (horario == null){
+            return true;
+        }
+        return !horario.matches("\\d{2}:\\d{2}");
     }
 
     public String abaEspecialidades(Scanner sc){
