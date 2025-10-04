@@ -26,6 +26,10 @@ public class Medico {
         this.horarioFimTrabalho = horarioFimTrabalho;
     }
 
+    public String getId(){
+        return id;
+    }
+
     public String getHorarioFimTrabalho() {
         return horarioFimTrabalho;
     }

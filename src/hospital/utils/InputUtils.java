@@ -17,7 +17,6 @@ public class InputUtils {
 
     }
     public static int validarInteiro(Scanner sc) {
-    //esse método serve para garantir que usuário irá fornecer apenas números
         try {
             return Integer.parseInt(sc.nextLine());
 
@@ -25,6 +24,15 @@ public class InputUtils {
             return -1;
         }
     }
+    public static double validarDouble(Scanner sc){
+        try {
+            return Double.parseDouble(sc.nextLine());
+        }
+        catch (NumberFormatException e){
+            return -1;
+        }
+    }
+
     public static double lerPorcentagem(Scanner sc) {
         double valor;
         System.out.print("Digite a porcentagem de desconto (0 a 100%): ");

@@ -7,7 +7,7 @@ public class Consulta {
     private String medicoId;
     private String dataHora;   // Formato improvisado: "yyyy-MM-dd HH:mm"
     private String local;      // sala
-    private String status;     //
+    private String status;
     private double custoFinal; // Custo após descontos aplicar Polimorfismo futuro
 
 

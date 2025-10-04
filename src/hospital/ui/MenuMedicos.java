@@ -6,6 +6,7 @@ import hospital.services.MedicoService;
 
 import java.util.Scanner;
 
+import static hospital.utils.InputUtils.validarDouble;
 import static hospital.utils.InputUtils.validarInteiro;
 
 
@@ -56,6 +57,14 @@ public class MenuMedicos {
 
         String especialidade= abaEspecialidades(sc);
         System.out.println();
+        double preco;
+        do {
+            System.out.print("Digite o preço da consulta:");
+            preco = validarDouble(sc);
+            if(preco < 0) System.out.println("Preço inválido, tente novamente");
+        }
+        while (preco < 0);
+
         String horarioInicio;
         System.out.println("Digite os horários no formato: XX:XX");
         do {
@@ -87,6 +96,7 @@ public class MenuMedicos {
         }
         while (horarioFinal ==null);
 
+        medicoService.cadastrarMedico(nome,crm, especialidade, preco, horarioInicio, horarioFinal);
 
         return abaPosCadastro(sc);
     }

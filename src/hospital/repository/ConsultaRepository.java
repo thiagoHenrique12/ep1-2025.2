@@ -17,6 +17,7 @@ public class ConsultaRepository {
     public static ConsultaRepository getInstance(){
         return instance;
     }
+
     public void salvarConsulta(Consulta consulta){
         listaConsultas.add(consulta);
     }

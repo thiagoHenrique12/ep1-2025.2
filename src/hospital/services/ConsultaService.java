@@ -8,6 +8,7 @@ import hospital.repository.ConsultaRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class ConsultaService {
     private final ConsultaRepository consultaRepository = ConsultaRepository.getInstance();
@@ -33,9 +34,7 @@ public class ConsultaService {
         double custoFinal = paciente.calcularCustoConsulta(custoBaseMedico);
         String id = "Con-" + UUID.randomUUID().toString().substring(0, 8);
 
-        Consulta novaConsulta = new Consulta(
-                id, pacienteId, medicoId, dataHora, local, "AGENDADA", custoFinal
-        );
+        Consulta novaConsulta = new Consulta(id, pacienteId, medicoId, dataHora, local, "AGENDADA", custoFinal);
 
         consultaRepository.salvarConsulta(novaConsulta);
         System.out.println("Consulta agendada com sucesso! ID: " + id);
@@ -67,14 +66,13 @@ public class ConsultaService {
     }
 
 
-    public List<String> gerarGradeHorarios(Medico medico, String data, int intervaloMinutos) {
+    public List<String> gerarGradeHorarios(Medico medico, String data) {
         List<String> todosSlots = new ArrayList<>();
+        int intervaloMinutos = 30; // por padrão cada consulta vai durar 30 minutos
 
         int inicioMinutos = converterParaMinutos(medico.getHorarioInicioTrabalho());
-
         int fimMinutos = converterParaMinutos(medico.getHorarioFimTrabalho());
-
-        int minutosAtuais = inicioMinutos;
+        int minutosAtuais = inicioMinutos; // minutos atuais vai servir como um ponto de partida
 
         // Loop para criar slots de consulta a cada 30 minutos
         while (minutosAtuais < fimMinutos) {
@@ -92,16 +90,29 @@ public class ConsultaService {
         return todosSlots;
     }
 
-    // método para converter HH:mm para minutos totais
-    private int converterParaMinutos(String horarioHHMM) {
+    private int converterParaMinutos(String horario) {
         try {
-            String[] partes = horarioHHMM.split(":");
+            String[] partes = horario.split(":");
             int horas = Integer.parseInt(partes[0]);
             int minutos = Integer.parseInt(partes[1]);
             return horas * 60 + minutos;
         } catch (Exception e) {
             return 0;
         }
+    }
+
+    public List<String> listarHorariosLivres (Medico medico, String data ){
+        List<String> todosSlots = gerarGradeHorarios(medico, data);
+
+        List<Consulta> consultasAtivas = consultaRepository.listarTodasAtivas();
+
+        List<String> horariosOcupados = consultasAtivas.stream().filter(c -> c.getMedicoId().equals(medico.getId()) &&
+                c.getDataHora().startsWith(data)).map(Consulta :: getDataHora).toList();
+        /*esse filtro serve para manter apenas aas consultas que pertencem ao médico desejado e as consultas que
+        possuem o começo do atributo dataHora igual à data desejada. Para cada consulta o map extrai os valores de dataHora
+         */
+        todosSlots.removeAll(horariosOcupados);
+        return todosSlots;
     }
 
 }
