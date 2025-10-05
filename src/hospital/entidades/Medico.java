@@ -48,4 +48,9 @@ public class Medico {
     public String getCrm() {
         return crm;
     }
+
+    @Override
+    public String toString() {
+        return nome+";"+crm+";"+especialidade+";"+id+ ";"+valorDaConsulta+";"+horarioInicioTrabalho+";"+horarioFimTrabalho;
+    }
 }

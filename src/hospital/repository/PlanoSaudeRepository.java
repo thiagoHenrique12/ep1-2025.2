@@ -11,7 +11,7 @@ public class PlanoSaudeRepository {
 
     private final List<PlanoDeSaude> listaPlanos = new ArrayList<>();
     private static final PlanoSaudeRepository instance = new PlanoSaudeRepository();
-    private static final String arquivoPlanos = "planos.csv";
+    private static final String arquivoPlanos = "src/hospital/data/planos.csv";
 
     private PlanoSaudeRepository(){
         carregarArquivo();
@@ -75,7 +75,6 @@ public class PlanoSaudeRepository {
                 PlanoDeSaude plano = new PlanoDeSaude(nome, id, descontoBase);
                 listaPlanos.add(plano);
             }
-            System.out.println("Dados dos planos carregados com sucesso!");
         }
         catch (FileNotFoundException e){
             System.out.println("Arquivo de planos não foi encontrado");

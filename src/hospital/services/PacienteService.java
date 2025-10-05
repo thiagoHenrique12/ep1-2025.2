@@ -11,7 +11,7 @@ import java.util.UUID;
 public class PacienteService {
     private final PacienteRepository pacienteRepository = PacienteRepository.getInstance();
 
-    public Paciente adicionarPaciente(String nome, String cpf, int idade,PlanoDeSaude plano){
+    public void adicionarPaciente(String nome, String cpf, int idade,PlanoDeSaude plano){
         String idPaciente = "idP-"+ UUID.randomUUID().toString().substring(0, 8);
 
         Paciente paciente;
@@ -26,7 +26,6 @@ public class PacienteService {
             System.out.println();
         }
         pacienteRepository.salvarPaciente(paciente);
-        return paciente;
     }
 
 

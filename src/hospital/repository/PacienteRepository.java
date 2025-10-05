@@ -11,7 +11,7 @@ import java.util.List;
 public class PacienteRepository {
     private static final PacienteRepository instance = new PacienteRepository();
     private final List<Paciente> listaPacientes = new ArrayList<>();
-    private static final String arquivoPacientes = "pacientes.csv";
+    private static final String arquivoPacientes = "src/hospital/data/pacientes.csv";
 
 
     private PacienteRepository(){
@@ -66,10 +66,10 @@ public class PacienteRepository {
                     if (plano != null) {
                         PacienteEspecial pEsp = new PacienteEspecial(id, nome, cpf, idade, plano);
                         listaPacientes.add(pEsp);
+                        System.out.println();
                     } else {
-                        // se o plano estiver vazio o sistema vai tratar como se fosse um paciente normal
-                        // para evitar perder os dados
                         listaPacientes.add(new Paciente(id, nome, cpf, idade));
+                        System.out.println();
                     }
                 }
                 else {
@@ -79,10 +79,10 @@ public class PacienteRepository {
             }
         }
              catch (FileNotFoundException e) {
-                System.out.println("Arquivo de pacientes não encontrado");
+                System.out.println("Erro: Arquivo de pacientes não encontrado");
         }
             catch(IOException | NumberFormatException e) {
-            System.out.println("Erro no salvamento de dados dos pacientes: \n" + e.getMessage());
+            System.out.println("Falha ao salvar pacientes: \n" + e.getMessage());
         }
     }
 }
