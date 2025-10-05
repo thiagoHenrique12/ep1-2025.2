@@ -1,7 +1,6 @@
 package hospital.services;
 
 import hospital.entidades.Medico;
-import hospital.entidades.Paciente;
 import hospital.repository.MedicoRepository;
 
 import java.util.ArrayList;
@@ -67,7 +66,7 @@ public class MedicoService {
         }
     }
 
-    public List<Medico> listarMedicos(){
+    public List<Medico> listarTodos(){
         return medicoRepository.listarTodos();
     }
 

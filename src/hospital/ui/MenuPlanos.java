@@ -3,6 +3,7 @@ package hospital.ui;
 import hospital.entidades.PlanoDeSaude;
 import hospital.services.PlanoSaudeService;
 
+import java.util.List;
 import java.util.Scanner;
 
 import static hospital.utils.InputUtils.lerPorcentagem;
@@ -34,10 +35,8 @@ public class MenuPlanos {
                     menuCadastrarPlano(sc);
                     break;
                 case 2:
-                    System.out.println("AREA PARA LISTAR...");
-                    for (PlanoDeSaude p : planoService.listarTodos()) { //fazer um metodo para isso e aplicar o tostring
-                        System.out.println(p);
-                    }
+                    System.out.println("\n===== PLANOS EXISTENTES =====");
+                    listarPlanos(planoService.listarTodos());
                     break;
                 case 0:
                     System.out.println("saindo...");
@@ -58,5 +57,19 @@ public class MenuPlanos {
         }while (desconto == -1);
         desconto= desconto / 100; //convertendo a porcentagem
         planoService.cadastrarPlano(nome, desconto);
+    }
+
+    private void listarPlanos(List<PlanoDeSaude> planos) {
+
+        int i =1;
+        for (PlanoDeSaude p : planos) {
+            System.out.println(i+".");
+            System.out.println("Nome do plano: "+p.getNome());
+            System.out.println("Plano ID: "+p.getPlanoId());
+            String descontoFormatado = String.format("%.0f%%", p.getDescontoBase() * 100);
+            System.out.println("Desconto oferecido: "+descontoFormatado);
+            i++;
+            System.out.println();
+        }
     }
 }

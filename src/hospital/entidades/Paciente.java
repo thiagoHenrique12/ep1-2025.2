@@ -29,6 +29,10 @@ public class Paciente {
         return cpf;
     }
 
+    public int getIdade() {
+        return idade;
+    }
+
     public double calcularCustoConsulta(double custoBase){
         double descontoIdade = 0;
         if (this.idade>= 60){
@@ -38,9 +42,4 @@ public class Paciente {
         return custoBase* (1 - descontoIdade);
     }
 
-
-    public String toString() {
-        return nome +";"+cpf+";"+idade+";"+id;
-
-    }
 }

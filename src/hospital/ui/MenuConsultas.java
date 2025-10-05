@@ -1,5 +1,6 @@
 package hospital.ui;
 
+import hospital.entidades.Consulta;
 import hospital.entidades.Medico;
 import hospital.entidades.Paciente;
 import hospital.services.ConsultaService;
@@ -30,7 +31,8 @@ public class MenuConsultas{
                     menuAgendarConsulta(sc);
                     break;
                 case 2:
-                    // implementar lógica para listar consultas
+                    System.out.println("=== CONSULTAS ATIVAS ===");
+                    listarConsultas(consultaService.listarTodas());
                     break;
                 case 0:
                     break;
@@ -97,7 +99,7 @@ public class MenuConsultas{
 
     private Medico selecionarMedico(Scanner sc) {
         System.out.println("\n===== SELEÇÃO DE MÉDICO =====");
-        List<Medico> lista = medicoService.listarMedicos();
+        List<Medico> lista = medicoService.listarTodos();
 
         if (lista.isEmpty()) {
             System.out.println("Nenhum médico cadastrado no sistema...");
@@ -160,5 +162,24 @@ public class MenuConsultas{
         String salaEscolhida = salas.get((op-1));
         System.out.println("Local escolhido: "+salaEscolhida);
         return salaEscolhida;
+    }
+
+    public void listarConsultas(List<Consulta> consultas){
+        if (consultas.isEmpty()) {
+            System.out.println("Nenhuma consultada agendada");
+            return;
+        }
+        int i =1;
+        for(Consulta c : consultas){
+            System.out.println(i+".");
+            Paciente p = pacienteService.buscarPorId(c.getPacienteId());
+            Medico m = medicoService.buscarPorId(c.getMedicoId());
+            System.out.println("Nome do paciente: "+p.getNome());
+            System.out.println("Nome do médico: "+m.getNome());
+            System.out.println("Data e hora: "+c.getDataHora());
+            System.out.println("Local: "+c.getLocal());
+            i++;
+            System.out.println();
+        }
     }
 }

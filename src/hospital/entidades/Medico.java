@@ -30,6 +30,10 @@ public class Medico {
         return valorDaConsulta;
     }
 
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
     public String getId(){
         return id;
     }
@@ -40,10 +44,6 @@ public class Medico {
 
     public String getHorarioInicioTrabalho() {
         return horarioInicioTrabalho;
-    }
-
-    public String toString() {
-    return nome +";"+crm+";"+especialidade+";"+id;
     }
 
     public String getNome() {

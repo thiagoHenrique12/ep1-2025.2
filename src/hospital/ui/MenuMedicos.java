@@ -1,9 +1,10 @@
 package hospital.ui;
 
 
-import hospital.services.ConsultaService;
+import hospital.entidades.Medico;
 import hospital.services.MedicoService;
 
+import java.util.List;
 import java.util.Scanner;
 
 import static hospital.utils.InputUtils.*;
@@ -18,7 +19,7 @@ public class MenuMedicos {
             System.out.println("\n======= MENU MÉDICOS ========");
             System.out.println("1. CADASTRAR MÉDICO");
             System.out.println("2. LISTAR MÉDICOS");
-            System.out.println("3teste");
+            System.out.println("0. VOLTAR");
             System.out.print("Selecione uma opção: ");
             op = validarInteiro(sc);
             switch (op) {
@@ -29,6 +30,8 @@ public class MenuMedicos {
                     while(op ==1);
                     break;
                 case 2:
+                    System.out.println("=== LISTA DE MÉDICOS ===");
+                    listarMedicos(medicoService.listarTodos());
                     break;
                 case 3:
 
@@ -142,6 +145,21 @@ public class MenuMedicos {
                 }
             }
             return resposta;
+        }
+
+        public void listarMedicos(List<Medico> medicos){
+            if (medicos.isEmpty()) System.out.println("Nenhum médico foi cadastrado");
+
+            int i=1;
+            for(Medico m : medicos){
+                System.out.println(i+".");
+                System.out.println("Nome: "+m.getNome());
+                System.out.println("CRM: "+m.getCrm());
+                System.out.println("Especialidade: "+m.getEspecialidade());
+                System.out.println();
+                i++;
+            }
+
         }
     }
 

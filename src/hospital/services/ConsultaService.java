@@ -8,7 +8,6 @@ import hospital.repository.ConsultaRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class ConsultaService {
     private final ConsultaRepository consultaRepository = ConsultaRepository.getInstance();
@@ -56,10 +55,10 @@ public class ConsultaService {
                     existente.getDataHora().equals(novaDataHora)) {
 
                 System.out.println("Conflito: Local " + novoLocal + " já está reservado para esse horário.");
-                return true; // ambos os true acima indicam um retorno de que existe conflito
+                return true;
             }
         }
-        return false; //esse falso está indicando que nenhum conflito foi encontrado
+        return false;
     }
 
 
@@ -83,7 +82,6 @@ public class ConsultaService {
 
             minutosAtuais += intervaloMinutos; // Avança para o próximo slot
         }
-
         return todosSlots;
     }
 
@@ -137,6 +135,9 @@ public class ConsultaService {
 
     public List<String> listarSalasDisponiveis() {
         return salas;
+    }
 
+    public List<Consulta> listarTodas(){
+        return consultaRepository.listarTodas();
     }
 }

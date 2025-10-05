@@ -1,6 +1,7 @@
 package hospital.ui;
 
 import hospital.entidades.Paciente;
+import hospital.entidades.PacienteEspecial;
 import hospital.entidades.PlanoDeSaude;
 import hospital.services.PacienteService;
 import hospital.services.PlanoSaudeService;
@@ -37,10 +38,9 @@ public class MenuPacientes {
                     while (op == 1);
                     break;
                 case 2:
-                    System.out.println("AREA PARA LISTAR...");
-                    for (Paciente p : pacienteService.listarPacientes()) { //fazer um metodo para isso
-                        System.out.println(p);
-                    }
+                    System.out.println("=== LISTA DE PACIENTES ===");
+                    listarPacientes(pacienteService.listarPacientes());
+
                     break;
                 case 0:
                     System.out.println("saindo...");
@@ -132,6 +132,28 @@ public class MenuPacientes {
         } else {
             return null;
         }
+    }
+
+    public void listarPacientes(List<Paciente> pacientes){
+        if (pacientes.isEmpty()){
+            System.out.println("Nenhum paciente foi cadastrado");
+            return;
+        }
+        int i=1;
+        for (Paciente p : pacientes){
+            System.out.println(i+".");
+            System.out.println("Nome: "+p.getNome());
+            System.out.println("Idade: "+p.getIdade());
+            System.out.println("CPF: "+p.getCpf());
+            if(p instanceof PacienteEspecial){
+                PacienteEspecial pEsp = (PacienteEspecial) p;
+                System.out.println("Plano de saúde: "+pEsp.getPlano().getNome());
+            }
+            else System.out.println("Não possui plano");
+            i++;
+            System.out.println();
+        }
+
     }
 }
 

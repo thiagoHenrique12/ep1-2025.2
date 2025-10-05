@@ -10,13 +10,13 @@ public class PacienteEspecial extends Paciente {
     public PlanoDeSaude getPlano(){
         return this.plano;
     }
+
     @Override
     public double calcularCustoConsulta(double custoBase){
-        double custoComDescontoIdade = super.calcularCustoConsulta(custoBase);/*aqui volta na classe mãe para ver se
-                                                                               se aplica*/
-        double descontoPlano =  this.plano.getDescontoBase(); //pegando o desconto que o plano oferece
 
-        return custoComDescontoIdade * descontoPlano; // juntando descontos e retornando
+        double custoComDescontoIdade = super.calcularCustoConsulta(custoBase);
+        double descontoPlano =  this.plano.getDescontoBase();
+        return custoComDescontoIdade * descontoPlano;
     }
 
     @Override
