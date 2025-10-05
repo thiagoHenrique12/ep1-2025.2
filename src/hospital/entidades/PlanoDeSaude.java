@@ -22,4 +22,8 @@ public class PlanoDeSaude {
     public String getPlanoId(){
         return this.planoId;
     }
+
+    public String toString(){
+        return getPlanoId() + ";" + getNome() + ";" + Double.toString(getDescontoBase());
+    }
 }

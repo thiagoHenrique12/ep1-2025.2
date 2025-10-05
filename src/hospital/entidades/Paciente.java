@@ -42,4 +42,8 @@ public class Paciente {
         return custoBase* (1 - descontoIdade);
     }
 
+    public String toString() {
+        return getId() + ";" + getNome() + ";" + getCpf() + ";" + getIdade();
+    }
+
 }

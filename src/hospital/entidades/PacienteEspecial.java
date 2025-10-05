@@ -13,10 +13,13 @@ public class PacienteEspecial extends Paciente {
 
     @Override
     public double calcularCustoConsulta(double custoBase){
-        System.out.println("SEU DESCONTO "+plano.getDescontoBase());
         double custoComDescontoIdade = super.calcularCustoConsulta(custoBase);
         double descontoPlano =  plano.getDescontoBase();
         return custoComDescontoIdade -(custoComDescontoIdade * descontoPlano);
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + ";" + this.plano.getPlanoId();
+    }
 }

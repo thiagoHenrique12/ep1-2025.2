@@ -10,13 +10,12 @@ public class PlanoSaudeService {
     private final PlanoSaudeRepository planoRepository = PlanoSaudeRepository.getInstance();
 
 
-    public PlanoDeSaude cadastrarPlano (String nome, double desconto){
+    public void cadastrarPlano (String nome, double desconto){
         String idPlano = "idPL-"+ UUID.randomUUID().toString().substring(0, 8);
 
         PlanoDeSaude plano = new PlanoDeSaude(nome, idPlano, desconto);
         planoRepository.salvarPlano(plano);
         System.out.println("O plano "+nome+" foi cadastrado com sucesso!");
-        return plano;
     }
     /* eu criei o listar tanto no service quando no repositório, pois não queria que o menu tivesse acesso
     diretamente os dados dentro do repositório*/

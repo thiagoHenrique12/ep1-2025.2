@@ -10,10 +10,10 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 ## Dados do Aluno
 
-- **Nome completo:** [Preencher aqui]
-- **Matrícula:** [Preencher aqui]
-- **Curso:** [Preencher aqui]
-- **Turma:** [Preencher aqui]
+- **Nome completo:** Thiago Henrique Machado de Souza
+- **Matrícula:** 242015960
+- **Curso:** Engenharias
+- **Turma:** 02
 
 ---
 
@@ -62,7 +62,7 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 ## Contato
 
-- [Opcional: E-mail pessoal do aluno.]
+- estudos.trabalhos12@gmail.com
 
 ---
 

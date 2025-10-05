@@ -11,7 +11,6 @@ import java.util.UUID;
 public class PacienteService {
     private final PacienteRepository pacienteRepository = PacienteRepository.getInstance();
 
-
     public Paciente adicionarPaciente(String nome, String cpf, int idade,PlanoDeSaude plano){
         String idPaciente = "idP-"+ UUID.randomUUID().toString().substring(0, 8);
 
