@@ -36,7 +36,7 @@ public class Paciente {
     public double calcularCustoConsulta(double custoBase){
         double descontoIdade = 0;
         if (this.idade>= 60){
-            descontoIdade = 0.15;
+            descontoIdade = 0.15; // valor fixo de desconto para idade
             System.out.println("paciente possui desconto por idade");
         }
         return custoBase* (1 - descontoIdade);

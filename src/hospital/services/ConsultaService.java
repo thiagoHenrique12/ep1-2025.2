@@ -26,10 +26,7 @@ public class ConsultaService {
             return null;
         }
         Paciente paciente = pacienteService.buscarPorId(pacienteId);
-        if (paciente == null) {
-            System.out.println("Nenhum paciente foi encontrado para o id fornecido");
-            return null;
-        }
+
         double custoFinal = paciente.calcularCustoConsulta(custoBaseMedico);
         String id = "Con-" + UUID.randomUUID().toString().substring(0, 8);
 

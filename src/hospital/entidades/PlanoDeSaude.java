@@ -18,12 +18,8 @@ public class PlanoDeSaude {
     public String getNome(){
         return nome;
     }
-    public String getPlanoId(){       //necessario implementação de um planoId válido
-        return this.planoId;
-    }
 
-    @Override
-    public String toString() { //futuramente será útil na persistência
-        return planoId + ";" + nome + ";" + String.format("%.2f", descontoBase);
+    public String getPlanoId(){
+        return this.planoId;
     }
 }

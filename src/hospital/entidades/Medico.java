@@ -9,11 +9,6 @@ public class Medico {
     private String horarioInicioTrabalho;
     private String horarioFimTrabalho;
 
-    public Medico(){
-        this.nome="";
-        this.crm="";
-        this.especialidade = "";
-    }
 
     public Medico(String nome, String crm, String especialidade, String id, double valorDaConsulta,
                   String horarioInicioTrabalho, String horarioFimTrabalho) {

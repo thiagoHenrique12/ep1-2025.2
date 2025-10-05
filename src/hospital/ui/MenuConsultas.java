@@ -178,6 +178,7 @@ public class MenuConsultas{
             System.out.println("Nome do médico: "+m.getNome());
             System.out.println("Data e hora: "+c.getDataHora());
             System.out.println("Local: "+c.getLocal());
+            System.out.printf("Valor final da consulta: R$ %.2f",c.getCustoFinal());
             i++;
             System.out.println();
         }
