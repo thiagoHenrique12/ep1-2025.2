@@ -91,8 +91,8 @@ public class MenuPacientes {
                     2. VOLTAR AO MENU DE PACIENTES \
                     
                     0. VOLTAR AO MENU PRINCIPAL""");
-            System.out.print("Selecione uma opção: ");
-            resposta = Integer.parseInt(sc.nextLine());
+
+            resposta =entradaValida(sc);
             if (resposta != 1 && resposta != 2 && resposta != 0) {
                 System.out.println("Digite uma opção válida.");
             } else {

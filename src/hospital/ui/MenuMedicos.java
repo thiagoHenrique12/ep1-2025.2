@@ -6,8 +6,7 @@ import hospital.services.MedicoService;
 
 import java.util.Scanner;
 
-import static hospital.utils.InputUtils.validarDouble;
-import static hospital.utils.InputUtils.validarInteiro;
+import static hospital.utils.InputUtils.*;
 
 
 public class MenuMedicos {
@@ -136,11 +135,9 @@ public class MenuMedicos {
                     2. VOLTAR AO MENU DE MÉDICOS \
                     
                     0. VOLTAR AO MENU PRINCIPAL""");
-                System.out.print("Selecione uma opção: ");
-                resposta = Integer.parseInt(sc.nextLine());
-                if (resposta != 1 && resposta != 2 && resposta != 0) {
-                    System.out.println("Digite uma opção válida.");
-                } else {
+                resposta = entradaValida(sc);
+                System.out.println();
+                if (resposta == 1 || resposta == 2 || resposta == 0) {
                     valido = false;
                 }
             }

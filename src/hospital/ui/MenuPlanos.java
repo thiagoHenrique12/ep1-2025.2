@@ -18,7 +18,6 @@ public class MenuPlanos {
             System.out.println("1. CADASTRAR UM PLANO");
             System.out.println("2. LISTAR PLANOS EXISTENTES");
             System.out.println("0. SAIR");
-            System.out.print("Selecione uma opção: ");
             int entradaValida;
             do {
                 System.out.print("Selecione uma opção: ");

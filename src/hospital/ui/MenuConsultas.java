@@ -68,8 +68,7 @@ public class MenuConsultas{
         double custoBase = medico.getValorDaConsulta();
 
         consultaService.agendarConsulta(paciente.getId(), medico.getId(),
-                data + " " + horarioEscolhido, local, custoBase);
-
+                horarioEscolhido, local, custoBase);
     }
 
 

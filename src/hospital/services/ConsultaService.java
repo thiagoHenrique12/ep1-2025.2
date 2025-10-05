@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public class ConsultaService {
     private final ConsultaRepository consultaRepository = ConsultaRepository.getInstance();
     private final PacienteService pacienteService = new PacienteService();
+    private final MedicoService medicoService = new MedicoService();
 
     public Consulta agendarConsulta(
             String pacienteId,
@@ -22,10 +23,9 @@ public class ConsultaService {
             double custoBaseMedico) {
 
         if (checarConflito(dataHora, medicoId, local)) {
-            System.err.println("ERRO: O horário, médico ou local está indisponível.");
+            System.err.println("ERRO: A consulta não pode ser agendada.");
             return null;
         }
-        // buscando o paciente
         Paciente paciente = pacienteService.buscarPorId(pacienteId);
         if (paciente == null) {
             System.out.println("Nenhum paciente foi encontrado para o id fornecido");
@@ -46,19 +46,16 @@ public class ConsultaService {
 
         for (Consulta existente : consultasAtivas) {
 
-            // validando o Conflito entre MÉDICO E HORÁRIO
-            if (existente.getMedicoId().equals(novoMedicoId) &&
-                    existente.getDataHora().equals(novaDataHora)) {
-
-                System.err.println("Conflito: Médico " + novoMedicoId + " já está agendado nesse horário.");
-                return true;
-            }
+           /* o método para validar o conflito entre médico e horário foi removido pois a partir de agora, a lista de
+           horarios se atualiza disponíveis para cada médico se atualiza mostrando apenas horarios livres, logo fica
+           impossível que seja cadastrado duas consultas no mesmo horario para o mesmo médico
+            */
 
             // validando o conflito de LOCAL E HORÁRIO
             if (existente.getLocal().equals(novoLocal) &&
                     existente.getDataHora().equals(novaDataHora)) {
 
-                System.err.println("Conflito: Local " + novoLocal + " já está reservado para esse horário.");
+                System.out.println("Conflito: Local " + novoLocal + " já está reservado para esse horário.");
                 return true; // ambos os true acima indicam um retorno de que existe conflito
             }
         }

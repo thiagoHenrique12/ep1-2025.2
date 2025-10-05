@@ -1,6 +1,7 @@
 package hospital.repository;
 
 import hospital.entidades.Medico;
+import hospital.entidades.Paciente;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,5 +23,9 @@ public class MedicoRepository {
 
     public List<Medico> listarTodos() {
         return new ArrayList<>(listaMedicos);
+    }
+
+    public Medico buscarPorId(String id){
+        return listaMedicos.stream().filter((Medico m)->m.getId().equals(id)).findFirst().orElse(null);
     }
 }

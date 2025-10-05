@@ -1,6 +1,7 @@
 package hospital.services;
 
 import hospital.entidades.Medico;
+import hospital.entidades.Paciente;
 import hospital.repository.MedicoRepository;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class MedicoService {
             case 3 -> "Ortopedista";
             case 4 -> "Clínico Geral";
             case 5 -> "Dermatologista";
+            case 6 -> "Cirurgião";
             default -> {
             System.out.println("Opção indisponível, tente novamente");
             yield null;
@@ -67,6 +69,10 @@ public class MedicoService {
 
     public List<Medico> listarMedicos(){
         return medicoRepository.listarTodos();
+    }
+
+    public Medico buscarPorId(String id){
+        return medicoRepository.buscarPorId(id);
     }
 
 
