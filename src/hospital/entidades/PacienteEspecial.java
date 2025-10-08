@@ -1,12 +1,13 @@
 package hospital.entidades;
 
 public class PacienteEspecial extends Paciente {
-    private PlanoDeSaude plano;
+    private final PlanoDeSaude plano;
 
     public PacienteEspecial(String id, String nome, String cpf, int idade, PlanoDeSaude plano) {
         super(id, nome, cpf, idade);
         this.plano = plano;
     }
+
     public PlanoDeSaude getPlano(){
         return this.plano;
     }
@@ -15,7 +16,7 @@ public class PacienteEspecial extends Paciente {
     public double calcularCustoConsulta(double custoBase){
         double custoComDescontoIdade = super.calcularCustoConsulta(custoBase);
         double descontoPlano =  plano.getDescontoBase();
-        return custoComDescontoIdade -(custoComDescontoIdade * descontoPlano);
+        return custoComDescontoIdade - (custoComDescontoIdade * descontoPlano);
     }
 
     @Override

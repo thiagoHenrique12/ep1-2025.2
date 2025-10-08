@@ -3,12 +3,10 @@ package hospital.services;
 import hospital.entidades.Medico;
 import hospital.repository.MedicoRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class MedicoService {
-    private final List<Medico> listaMedicos = new ArrayList<>();
     private final MedicoRepository medicoRepository= MedicoRepository.getInstance();
 
     public void cadastrarMedico(String nome, String crm, String especialidade, double valorDaConsulta,
@@ -39,7 +37,7 @@ public class MedicoService {
 
     public boolean validarCrm(String crm) {
         if (crm == null) {
-            return true; // esse true serve para ficar no looping while enquanto o crm for null
+            return true;
         }
         return !crm.matches("\\d{5}");
     }
@@ -65,6 +63,7 @@ public class MedicoService {
             return null;
         }
     }
+   // métodos usados para intermediar o contato entre UI e o repositório
 
     public List<Medico> listarTodos(){
         return medicoRepository.listarTodos();

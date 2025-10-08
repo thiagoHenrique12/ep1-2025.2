@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PacienteRepository {
+    //padrão singleton
     private static final PacienteRepository instance = new PacienteRepository();
     private final List<Paciente> listaPacientes = new ArrayList<>();
     private static final String arquivoPacientes = "src/hospital/data/pacientes.csv";
@@ -28,7 +29,6 @@ public class PacienteRepository {
     public Paciente buscarPorId(String id){
         return listaPacientes.stream().filter((Paciente p)->p.getId().equals(id)).findFirst().orElse(null);
     }
-
 
     public void salvarArquivo() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivoPacientes))) {
@@ -60,6 +60,7 @@ public class PacienteRepository {
                 String cpf = campos[2];
                 int idade = Integer.parseInt(campos[3]);
 
+                // lógica para validar paciente comum ou paciente especial
                 if (campos.length > 4) {
                     String planoId = campos[4];
                     PlanoDeSaude plano = planoSaudeRepository.buscarPorId(planoId);

@@ -2,15 +2,15 @@ package hospital.repository;
 
 import hospital.entidades.PlanoDeSaude;
 
-import javax.imageio.IIOException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlanoSaudeRepository {
 
-    private final List<PlanoDeSaude> listaPlanos = new ArrayList<>();
+    //padrão singleton
     private static final PlanoSaudeRepository instance = new PlanoSaudeRepository();
+    private final List<PlanoDeSaude> listaPlanos = new ArrayList<>();
     private static final String arquivoPlanos = "src/hospital/data/planos.csv";
 
     private PlanoSaudeRepository(){
@@ -42,11 +42,7 @@ public class PlanoSaudeRepository {
     }
 
     public PlanoDeSaude buscarPorId(String idPlano){
-        /*obs: mudei para uma notação mais longa, mas que faz mais sentido para acompanhar o código */
         return listaPlanos.stream().filter((PlanoDeSaude p)->p.getPlanoId().equals(idPlano)).findFirst().orElse(null);
-        //CONCEITO IMPORTANTE, pesquisar mais sobre
-        /*esse filtro está buscando o primeiro Plano que possuir um id igual ao parametro,
-        se nao achar vai retornar o container Optional<> null  */
     }
 
     public void salvarArquivo(){

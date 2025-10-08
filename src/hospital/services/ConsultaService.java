@@ -14,16 +14,15 @@ public class ConsultaService {
     private final PacienteService pacienteService = new PacienteService();
     private final MedicoService medicoService = new MedicoService();
 
-    public Consulta agendarConsulta(
+    public void agendarConsulta(
             String pacienteId,
             String medicoId,
             String dataHora,
             String local,
             double custoBaseMedico) {
 
-        if (checarConflito(dataHora, medicoId, local)) {
-            System.err.println("ERRO: A consulta não pode ser agendada.");
-            return null;
+        if (checarConflito(dataHora, local)) {
+            return ;
         }
         Paciente paciente = pacienteService.buscarPorId(pacienteId);
 
@@ -33,31 +32,27 @@ public class ConsultaService {
         Consulta novaConsulta = new Consulta(id, pacienteId, medicoId, dataHora, local, "AGENDADA", custoFinal);
 
         consultaRepository.salvarConsulta(novaConsulta);
-        System.out.println("Consulta agendada com sucesso! ID: " + id);
-        return novaConsulta;
+        Medico medico = medicoService.buscarPorId(medicoId);
+        System.out.println();
+        System.out.println("Consulta agendada com sucesso para o médico: "+ medico.getNome()+ " às "+dataHora+"no(a) "+local);
     }
 
-    private boolean checarConflito(String novaDataHora, String novoMedicoId, String novoLocal) {
+    private boolean checarConflito(String novaDataHora,  String novoLocal) {
         List<Consulta> consultasAtivas = consultaRepository.listarTodasAtivas();
 
         for (Consulta existente : consultasAtivas) {
-
-           /* o método para validar o conflito entre médico e horário foi removido pois a partir de agora, a lista de
-           horarios se atualiza disponíveis para cada médico se atualiza mostrando apenas horarios livres, logo fica
-           impossível que seja cadastrado duas consultas no mesmo horario para o mesmo médico
-            */
 
             // validando o conflito de LOCAL E HORÁRIO
             if (existente.getLocal().equals(novoLocal) &&
                     existente.getDataHora().equals(novaDataHora)) {
 
-                System.out.println("Conflito: Local " + novoLocal + " já está reservado para esse horário.");
+                System.out.println("Conflito: O Local " + novoLocal + " já está reservado para esse horário.");
+                System.out.println("Essa consulta não foi agendada!");
                 return true;
             }
         }
         return false;
     }
-
 
     public List<String> gerarGradeHorarios(Medico medico, String data) {
         List<String> todosSlots = new ArrayList<>();
@@ -65,7 +60,7 @@ public class ConsultaService {
 
         int inicioMinutos = converterParaMinutos(medico.getHorarioInicioTrabalho());
         int fimMinutos = converterParaMinutos(medico.getHorarioFimTrabalho());
-        int minutosAtuais = inicioMinutos; // minutos atuais vai servir como um ponto de partida
+        int minutosAtuais = inicioMinutos; // minutosAtuais vai servir como um ponto de partida
 
         // Loop para criar slots de consulta a cada 30 minutos
         while (minutosAtuais < fimMinutos) {
@@ -74,7 +69,7 @@ public class ConsultaService {
             int m = minutosAtuais % 60;
             String horario = String.format("%02d:%02d", h, m);
 
-            // Adiciona formatado: "AAAA-MM-DD HH:mm"
+            // formata para: "AAAA-MM-DD HH: mm"
             todosSlots.add(data + " " + horario);
 
             minutosAtuais += intervaloMinutos; // Avança para o próximo slot
@@ -100,18 +95,25 @@ public class ConsultaService {
 
         List<String> horariosOcupados = consultasAtivas.stream().filter(c -> c.getMedicoId().equals(medico.getId()) &&
                 c.getDataHora().startsWith(data)).map(Consulta::getDataHora).toList();
-        /*esse filtro serve para manter apenas aas consultas que pertencem ao médico desejado e as consultas que
-        possuem o começo do atributo dataHora igual à data desejada. Para cada consulta o map extrai os valores de dataHora
-         */
         todosSlots.removeAll(horariosOcupados);
         return todosSlots;
-
     }
 
     public String validarData(String data) {
         String regex = "\\d{4}-\\d{2}-\\d{2}";
         if (!data.matches(regex)) {
             System.out.println("Formato inválido de data, siga exatamente o modelo e use apenas dígitos");
+            return null;
+        }
+        String[] dataSeparada = data.split("-");
+        int mes = Integer.parseInt(dataSeparada[1]);
+        int dia = Integer.parseInt(dataSeparada[2]);
+        if (dia > 30){
+            System.out.println("Data inválida, digite um dia entre 01 e 30");
+            return null;
+        }
+        if (mes > 12){
+            System.out.println("Data inválida, digite um mês entre 01 e 12");
             return null;
         }
         return data;
@@ -133,6 +135,8 @@ public class ConsultaService {
     public List<String> listarSalasDisponiveis() {
         return salas;
     }
+
+    //método usado para intermediar o contato entre UI e repositório
 
     public List<Consulta> listarTodas(){
         return consultaRepository.listarTodas();

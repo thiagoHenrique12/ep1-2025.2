@@ -31,6 +31,7 @@ public class MenuConsultas{
                     menuAgendarConsulta(sc);
                     break;
                 case 2:
+                    System.out.println();
                     System.out.println("=== CONSULTAS ATIVAS ===");
                     listarConsultas(consultaService.listarTodas());
                     break;
@@ -44,7 +45,7 @@ public class MenuConsultas{
 
 
     private void menuAgendarConsulta(Scanner sc) {
-        System.out.println("\n===== AGENDAMENTO DE CONSULTA =====");
+        System.out.println("\n     AGENDAMENTO DE CONSULTA ");
         Paciente paciente = selecionarPaciente(sc); // implementar looping para casos gerais de entradas erradas
         if(paciente == null) {
             System.out.println("Não foi possível concluir esse agendamento");
@@ -55,7 +56,7 @@ public class MenuConsultas{
             System.out.println("Não foi possível concluir esse agendamento");
             return;
         }
-        String data; // IMPLEMENTAÇÃO: ainda é necessário criar uma forma de validar cada componete da data
+        String data;
         do {
             System.out.print("\nDigite a data da consulta (AAAA-MM-DD): ");
             data = sc.nextLine();
@@ -75,7 +76,7 @@ public class MenuConsultas{
 
 
 
-    private Paciente selecionarPaciente(Scanner sc) {
+    public Paciente selecionarPaciente(Scanner sc) {
         System.out.println("\n===== SELEÇÃO DE PACIENTE =====");
         List<Paciente> lista = pacienteService.listarPacientes();
 

@@ -1,15 +1,11 @@
 package hospital.entidades;
 
 public class Paciente {
-    private String nome;
-    private String cpf;
-    private int idade;
-    private String id;
+    private final String nome;
+    private final String cpf;
+    private final int idade;
+    private final String id;
 
-
-    public Paciente(){
-
-    }
     public Paciente(String id, String nome, String cpf, int idade){
         this.nome = nome;
         this.cpf = cpf;
@@ -36,8 +32,7 @@ public class Paciente {
     public double calcularCustoConsulta(double custoBase){
         double descontoIdade = 0;
         if (this.idade>= 60){
-            descontoIdade = 0.15; // valor fixo de desconto para idade
-            System.out.println("paciente possui desconto por idade");
+            descontoIdade = 0.15; // valor fixo de desconto para idade: 15%
         }
         return custoBase* (1 - descontoIdade);
     }
@@ -45,5 +40,4 @@ public class Paciente {
     public String toString() {
         return getId() + ";" + getNome() + ";" + getCpf() + ";" + getIdade();
     }
-
 }

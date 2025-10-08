@@ -1,13 +1,13 @@
 package hospital.repository;
 
 import hospital.entidades.Medico;
-import hospital.entidades.Paciente;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MedicoRepository {
+    //padrão singleton
     private static final MedicoRepository instance = new MedicoRepository();
     private final List<Medico> listaMedicos = new ArrayList<>();
     private static final String arquivosMedicos = "src/hospital/data/medicos.csv";
@@ -23,7 +23,6 @@ public class MedicoRepository {
     public void salvarMedico(Medico medico){
         listaMedicos.add(medico);
         salvarParaArquivo();
-
     }
 
     public List<Medico> listarTodos() {
@@ -34,11 +33,9 @@ public class MedicoRepository {
         return listaMedicos.stream().filter((Medico m)->m.getId().equals(id)).findFirst().orElse(null);
     }
 
-
     public void salvarParaArquivo() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivosMedicos))) {
             for (Medico medico : listaMedicos) {
-                // O toString() do Medico deve incluir Nome, CRM, Especialidade, Custo, ID, HoraInício, HoraFim
                 writer.write(medico.toString());
                 writer.newLine();
             }
@@ -51,7 +48,6 @@ public class MedicoRepository {
         }
     }
 
-
     private void carregarArquivo() {
         try (BufferedReader reader = new BufferedReader(new FileReader(arquivosMedicos))) {
             String linha;
@@ -62,7 +58,6 @@ public class MedicoRepository {
                 listaMedicos.add(medico);
 
             }
-
         } catch (FileNotFoundException e) {
             System.out.println("Erro: Arquivo de médicos não encontrado");
         } catch (IOException | NumberFormatException e) {
@@ -82,7 +77,6 @@ public class MedicoRepository {
         String horarioInicioTrabalho = campos[5];
         String horarioFimTrabalho = campos[6];
 
-        Medico medico = new Medico(nome, crm, especialidade, id, valorDaConsulta, horarioInicioTrabalho, horarioFimTrabalho);
-        return medico;
+        return new Medico(nome, crm, especialidade, id, valorDaConsulta, horarioInicioTrabalho, horarioFimTrabalho);
     }
 }

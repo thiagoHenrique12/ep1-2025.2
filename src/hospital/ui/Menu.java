@@ -3,10 +3,8 @@ package hospital.ui;
 import java.util.Scanner;
 
 public class Menu {
+    // Scanner final usado como parâmetro
     private final Scanner sc = new Scanner(System.in);
-    /* optei por fazer um Scanner sendo final, assim será evitado duplicação e haverá um único fechamento
-    com sc.close para esse scanner, evitando possíveis erros e quebras na aplicação
-     */
     private final MenuPacientes menuPacientes = new MenuPacientes();
     private final MenuMedicos menuMedicos = new MenuMedicos();
     private final MenuPlanos menuPlanos = new MenuPlanos();

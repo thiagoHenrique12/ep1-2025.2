@@ -5,13 +5,14 @@ public class Consulta {
     private String id;
     private String pacienteId;
     private String medicoId;
-    private String dataHora;   // Formato improvisado: "yyyy-MM-dd HH:mm"
-    private String local;      // sala
+    private String dataHora;
+    private String local;
     private String status;
-    private double custoFinal; // Custo após descontos aplicar Polimorfismo futuro
+    private double custoFinal;
 
 
-    public Consulta(String id, String pacienteId, String medicoId, String dataHora, String local, String status, double custoFinal) {
+    public Consulta(String id, String pacienteId, String medicoId, String dataHora,
+                    String local, String status, double custoFinal) {
         this.id = id;
         this.pacienteId = pacienteId;
         this.medicoId = medicoId;
@@ -23,28 +24,37 @@ public class Consulta {
 
     public Consulta() {}
 
+    public String getId() {
+        return id;
+    }
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public String getPacienteId() { return pacienteId; }
-    public void setPacienteId(String pacienteId) { this.pacienteId = pacienteId; }
+    public String getPacienteId() {
+        return pacienteId;
+    }
 
-    public String getMedicoId() { return medicoId; }
-    public void setMedicoId(String medicoId) { this.medicoId = medicoId; }
+    public String getMedicoId() {
+        return medicoId;
+    }
 
-    public String getDataHora() { return dataHora; }
-    public void setDataHora(String dataHora) { this.dataHora = dataHora; }
+    public String getDataHora() {
+        return dataHora;
+    }
 
-    public String getLocal() { return local; }
-    public void setLocal(String local) { this.local = local; }
+    public String getLocal() {
+        return local;
+    }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public String getStatus() {
+        return status;
+    }
 
-    public double getCustoFinal() { return custoFinal; }
-    public void setCustoFinal(double custoFinal) { this.custoFinal = custoFinal; }
-
+    public double getCustoFinal() {
+        return custoFinal;
+    }
 
     @Override
     public String toString() {

@@ -68,7 +68,7 @@ public class MenuMedicos {
         while (preco < 0);
 
         String horarioInicio;
-        System.out.println("\nDigite todos os horários no formato: XX:XX");
+        System.out.println("\nOs horários devem estar no formato: XX:XX");
         do {
             System.out.print("Digite o horário do início do expediente: ");
             horarioInicio = sc.nextLine();
@@ -86,7 +86,8 @@ public class MenuMedicos {
             if (horarioFinal!= null){
                 String[] partesI = horarioInicio.split(":");
                 String[] partesF = horarioFinal.split(":");
-                if (Integer.parseInt(partesI[0]) > Integer.parseInt(partesF[0])){ //conferindo se as horas do horario final vem depois do horário inicial
+                //conferindo se as horas do horario final vem depois do horário inicial:
+                if (Integer.parseInt(partesI[0]) > Integer.parseInt(partesF[0])){
                     System.out.println("Horário inválido, expediente começando às "+horarioInicio);
                     horarioFinal = null;
                 }
@@ -109,7 +110,7 @@ public class MenuMedicos {
     public String abaEspecialidades(Scanner sc){
         String especialidade;
         System.out.println();
-        System.out.println("DEFINA UMA ESPECIALIDADE");
+        System.out.println("=== DEFINA UMA ESPECIALIDADE ===");
         System.out.println("""
                 1. CARDIOLOGISTA
                 2. UROLOGISTA
@@ -133,13 +134,14 @@ public class MenuMedicos {
             boolean valido = true;
             while (valido) {
                 System.out.println("""
+                    === MENU PÓS CADASTRO ===\
+                    
                     1. CADASTRAR OUTRO MÉDICO\
                     
                     2. VOLTAR AO MENU DE MÉDICOS \
                     
                     0. VOLTAR AO MENU PRINCIPAL""");
                 resposta = entradaValida(sc);
-                System.out.println();
                 if (resposta == 1 || resposta == 2 || resposta == 0) {
                     valido = false;
                 }

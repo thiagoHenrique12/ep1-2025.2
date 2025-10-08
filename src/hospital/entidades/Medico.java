@@ -1,13 +1,13 @@
 package hospital.entidades;
 
 public class Medico {
-    private String nome;
-    private String crm;
-    private String especialidade;
-    private String id;
-    private double valorDaConsulta;
-    private String horarioInicioTrabalho;
-    private String horarioFimTrabalho;
+    private final String nome;
+    private final String crm;
+    private final String especialidade;
+    private final String id;
+    private final double valorDaConsulta;
+    private final String horarioInicioTrabalho;
+    private final String horarioFimTrabalho;
 
 
     public Medico(String nome, String crm, String especialidade, String id, double valorDaConsulta,

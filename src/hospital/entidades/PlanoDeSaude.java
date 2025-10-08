@@ -1,9 +1,9 @@
 package hospital.entidades;
 
 public class PlanoDeSaude {
-    private String nome;
-    private String planoId;
-    private double descontoBase;
+    private final String nome;
+    private final String planoId;
+    private final double descontoBase;
 
     public PlanoDeSaude(String nome, String PlanoId, double descontoBase){
         this.nome=nome;
@@ -24,6 +24,6 @@ public class PlanoDeSaude {
     }
 
     public String toString(){
-        return getPlanoId() + ";" + getNome() + ";" + Double.toString(getDescontoBase());
+        return getPlanoId() + ";" + getNome() + ";" + getDescontoBase();
     }
 }

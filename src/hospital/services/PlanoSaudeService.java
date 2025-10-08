@@ -17,13 +17,12 @@ public class PlanoSaudeService {
         planoRepository.salvarPlano(plano);
         System.out.println("O plano "+nome+" foi cadastrado com sucesso!");
     }
-    /* eu criei o listar tanto no service quando no repositório, pois não queria que o menu tivesse acesso
-    diretamente os dados dentro do repositório*/
+
+    // métodos usados para intermediar o contato entre UI e o repositório
     public List<PlanoDeSaude> listarTodos (){
         return planoRepository.listarTodos();
     }
 
-    //segue a mesma lógica do metodo acima
     public PlanoDeSaude buscarPlanoPorId(String idPlano){
         return planoRepository.buscarPorId(idPlano);
     }

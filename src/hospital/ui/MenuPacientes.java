@@ -6,7 +6,7 @@ import hospital.entidades.PlanoDeSaude;
 import hospital.services.PacienteService;
 import hospital.services.PlanoSaudeService;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -59,7 +59,7 @@ public class MenuPacientes {
         do {
             System.out.print("Digite a idade: ");
             String idade = sc.nextLine();
-            idadeValidada = PacienteService.validarIdade(idade); //validar idade esta incoerente, necessario separar a validação do input
+            idadeValidada = PacienteService.validarIdade(idade);
         }
         while(idadeValidada < 0);
         String cpf;
@@ -120,7 +120,7 @@ public class MenuPacientes {
                 PlanoDeSaude p = planosDisponiveis.get(i);
                 System.out.printf("  %d. %s (Desconto: %.0f%%)\n", i + 1, p.getNome(), p.getDescontoBase() * 100);
             }
-            int op = -1;
+            int op;
             do {
                 op = entradaValida(sc);
                 if (op < 1 || op > planosDisponiveis.size()) {
@@ -145,8 +145,7 @@ public class MenuPacientes {
             System.out.println("Nome: "+p.getNome());
             System.out.println("Idade: "+p.getIdade());
             System.out.println("CPF: "+p.getCpf());
-            if(p instanceof PacienteEspecial){
-                PacienteEspecial pEsp = (PacienteEspecial) p;
+            if(p instanceof PacienteEspecial pEsp){
                 System.out.println("Plano de saúde: "+pEsp.getPlano().getNome());
             }
             else System.out.println("Não possui plano");

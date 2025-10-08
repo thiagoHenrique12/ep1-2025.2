@@ -15,6 +15,7 @@ public class PacienteService {
         String idPaciente = "idP-"+ UUID.randomUUID().toString().substring(0, 8);
 
         Paciente paciente;
+        //lógica para instanciar um paciente especial ou um paciente comum
         if (plano !=null){
              paciente = new PacienteEspecial(idPaciente,nome,cpf,idade,plano);
             System.out.println("Paciente "+nome+", cadastrado com o plano: " +plano.getNome());
@@ -27,7 +28,6 @@ public class PacienteService {
         }
         pacienteRepository.salvarPaciente(paciente);
     }
-
 
     public static int validarIdade(String idade){
         try {
@@ -51,17 +51,15 @@ public class PacienteService {
         if (cpf == null) return null;
 
         String cpfSemFormato = "\\d{11}"; // 11 dígitos inteiros
-
-        String cpfFormatado = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}";
-        // Se não corresponder a nenhum dos dois formatos, retorna falso
+        String cpfFormatado = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}";// 11 dígitos formatados
         if (!cpf.matches(cpfSemFormato) && !cpf.matches(cpfFormatado)) {
             return null;
         }
 
-        //caso esteja formatado, remove a pontuação para padronizar
         return cpf.replaceAll("\\D", "");
     }
 
+    // métodos usados para intermediar o contato entre UI e o repositório
     public Paciente buscarPorId(String id){
         return pacienteRepository.buscarPorId(id);
     }
