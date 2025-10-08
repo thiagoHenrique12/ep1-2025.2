@@ -37,6 +37,14 @@ public class Paciente {
         return custoBase* (1 - descontoIdade);
     }
 
+    public double calcularDescontoInternacao(double custoBase) {
+        double descontoIdade = 0;
+        if (this.idade >= 60) {
+            descontoIdade = 0.15; // desconto fixo
+        }
+        return custoBase * (1.0 - descontoIdade);
+    }
+
     public String toString() {
         return getId() + ";" + getNome() + ";" + getCpf() + ";" + getIdade();
     }
