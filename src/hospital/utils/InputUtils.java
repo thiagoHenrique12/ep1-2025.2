@@ -5,13 +5,10 @@ import java.util.Scanner;
 public class InputUtils {
     public static int entradaValida (Scanner sc){
         int entradaValida;
-        do {
+
+            System.out.print("Selecione uma opção: ");
             entradaValida = validarInteiro(sc);
 
-            if (entradaValida == -1) {
-                System.out.println("Entrada inválida. Tente novamente");
-            }
-        } while (entradaValida == -1);
         return entradaValida;
 
     }

@@ -1,8 +1,6 @@
 package hospital.ui;
 
-import hospital.entidades.Medico;
-import hospital.entidades.Paciente;
-import hospital.entidades.Quarto;
+import hospital.entidades.*;
 import hospital.services.InternacaoService;
 import hospital.services.MedicoService;
 import hospital.services.PacienteService;
@@ -37,10 +35,10 @@ public class MenuInternacoes {
                     menuInternarPaciente(sc);
                     break;
                 case 2:
-                    //menuDarAlta(sc);
+                    menuDarAlta(sc);
                     break;
                 case 3:
-                    //listarInternacoesAtivas();
+                    listarInternacoesAtivas();
                     break;
                 case 0:
                     break;
@@ -67,13 +65,49 @@ public class MenuInternacoes {
 
         String dataEntrada;
         do {
-            System.out.print("Digite a data de entrada (AAAA-MM-DD): ");
+            System.out.print("\nDigite a data de entrada (AAAA-MM-DD): ");
             dataEntrada = sc.nextLine();
             dataEntrada = validarData(dataEntrada);
         }
         while (dataEntrada == null);
 
         internacaoService.internarPaciente(paciente.getId(), medico.getId(), quarto.getId(), dataEntrada);
+    }
+
+
+    private void menuDarAlta(Scanner sc) {
+        System.out.println("\n===== CONCEDER ALTA HOSPITALAR =====");
+
+        List<Internacao> ativas = internacaoService.listarInternacoesAtivas();
+
+        if (ativas.isEmpty()) {
+            System.out.println("Nenhuma internação ativa no momento para dar alta.");
+            return;
+        }
+
+        listarInternacoesAtivas();
+
+        int op = -1;
+        do {
+            System.out.print("\nSelecione o número da internação para dar alta: ");
+             op = InputUtils.entradaValida(sc);
+            if (op < 1 || op > ativas.size()) {
+                System.out.println("Seleção inválida.");
+            }
+        }
+        while (op < 1 || op > ativas.size());
+
+        Internacao internacao = ativas.get(op - 1);
+
+        int dias;
+        do {
+            System.out.print("Digite a quantidade de dias internados: ");
+            dias = InputUtils.entradaValida(sc);
+            if (dias <= 0) System.out.println("O número de dias deve ser maior que zero.");
+        } while (dias <= 0);
+
+
+        internacaoService.darAlta(internacao.getId(), dias);
     }
 
 
@@ -131,7 +165,6 @@ public class MenuInternacoes {
 
         System.out.println("\n===== QUARTOS DISPONÍVEIS PARA INTERNAÇÃO =====");
 
-        // 1. LISTAR QUARTOS DISPONÍVEIS
         for (int i = 0; i < disponiveis.size(); i++) {
             Quarto q = disponiveis.get(i);
             System.out.printf("  %d. Quarto %s (Tipo: %s) - Custo: R$ %.2f/dia\n",
@@ -143,12 +176,42 @@ public class MenuInternacoes {
 
         if (op > 0 && op <= disponiveis.size()) {
             Quarto quartoSelecionado = disponiveis.get(op - 1);
-            System.out.printf("Quarto %s (%s) selecionado.\n", quartoSelecionado.getCodigo(), quartoSelecionado.getTipo());
+            System.out.printf("\nQuarto %s (%s) selecionado.\n", quartoSelecionado.getCodigo(), quartoSelecionado.getTipo());
             return quartoSelecionado;
         }
 
         System.out.println("Seleção inválida. Retornando ao menu.");
         return null;
+    }
+
+
+    public void listarInternacoesAtivas(){
+
+        System.out.println("\n===== INTERNAÇÕES ATIVAS NO HOSPITAL =====");
+        List<Internacao> ativas = internacaoService.listarInternacoesAtivas();
+
+        if (ativas.isEmpty()) {
+            System.out.println("Nenhuma internação ativa registrada no momento.");
+            return;
+        }
+
+        int c = 1;
+        for (Internacao i : ativas) {
+
+            Paciente p = pacienteService.buscarPorId(i.getPacienteId());
+            Quarto q = quartoService.buscarPorId(i.getQuartoId());
+            Medico m = medicoService.buscarPorId(i.getMedicoId());
+
+            System.out.println();
+            System.out.println(c+".");
+            System.out.println("Quarto: "+q.getCodigo());
+            System.out.println("Nome do paciente: "+p.getNome());
+            System.out.println("Nome do médico: "+m.getNome());
+            System.out.println("Tipo de quarto: "+ q.getTipo());
+            System.out.printf("Valor da diária: R$ %.2f",q.getCustoDiaria());
+            c++;
+            System.out.println();
+        }
     }
 
 

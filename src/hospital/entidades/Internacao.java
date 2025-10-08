@@ -6,7 +6,8 @@ public class Internacao {
     private String medicoId;
     private String quartoId;
     private String dataEntrada;
-    private String dataSaida;
+    private boolean ativa;
+
     private double custoTotal;
 
     // Construtor
@@ -16,12 +17,21 @@ public class Internacao {
         this.medicoId = medicoId;
         this.quartoId = quartoId;
         this.dataEntrada = dataEntrada;
-        this.dataSaida = null;
+        this.ativa=true;
+
         this.custoTotal = 0.0;
     }
 
     public String getId() {
         return id;
+    }
+
+    public boolean isAtiva() {
+        return ativa;
+    }
+
+    public void setAtiva(boolean ativa) {
+        this.ativa = ativa;
     }
 
     public String getPacienteId() {
@@ -32,24 +42,18 @@ public class Internacao {
         return quartoId;
     }
 
-    public void setDataSaida(String dataSaida) {
-        this.dataSaida = dataSaida;
+    public String getMedicoId() {
+        return medicoId;
     }
+
     public void setCustoTotal(double custoTotal) {
         this.custoTotal = custoTotal;
     }
 
-    public String getDataSaida() {
-        return dataSaida;
-    }
-
-    public String getDataEntrada() {
-        return dataEntrada;
-    }
 
     @Override
     public String toString() {
         return id + ";" + pacienteId + ";" + medicoId + ";" + quartoId + ";" +
-                dataEntrada + ";" + dataSaida + ";" +  custoTotal;
+                dataEntrada + ";"+ativa+";" +  custoTotal;
     }
 }

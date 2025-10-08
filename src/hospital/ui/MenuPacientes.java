@@ -26,9 +26,16 @@ public class MenuPacientes {
             System.out.println("1. CADASTRAR PACIENTE");
             System.out.println("2. LISTAR PACIENTE");
             System.out.println("0. SAIR");
-            System.out.print("Selecione uma opção: ");
-            op = validarInteiro(sc);
+            int entradaValida;
+            do {
+                System.out.print("Selecione uma opção: ");
+                entradaValida = validarInteiro(sc);
 
+                if (entradaValida == -1) {
+                    System.out.println("Entrada inválida.");
+                }
+            } while (entradaValida == -1);
+            op = entradaValida;
             switch (op) {
                 case 1:
                      //looping para realizar cadastro de novos pacientes
@@ -86,7 +93,9 @@ public class MenuPacientes {
         boolean valido = true;
         while (valido) {
             System.out.println("""
-                    1. CADASTRAR OUTRO PACIENTE\
+                    === MENU PÓS CADASTRO === \
+                    
+                    1. CADASTRAR OUTRO PACIENTE \
                     
                     2. VOLTAR AO MENU DE PACIENTES \
                     
@@ -94,7 +103,7 @@ public class MenuPacientes {
 
             resposta =entradaValida(sc);
             if (resposta != 1 && resposta != 2 && resposta != 0) {
-                System.out.println("Digite uma opção válida.");
+                System.out.println("Digite uma opção válida.\n");
             } else {
                 valido = false;
             }

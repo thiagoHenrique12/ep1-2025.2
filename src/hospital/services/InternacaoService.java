@@ -14,14 +14,14 @@ public class InternacaoService {
     private final PacienteService pacienteService = new PacienteService();
     private final QuartoService quartoService = new QuartoService();
 
-    public Internacao internarPaciente(String pacienteId, String medicoId,
+    public void internarPaciente(String pacienteId, String medicoId,
                                        String quartoId, String dataEntrada) {
 
         Quarto quarto = quartoService.buscarPorId(quartoId);
 
         if (quarto == null || quarto.isOcupado()) {
             System.err.println("ERRO: Quarto não encontrado ou já está ocupado.");
-            return null;
+            return ;
         }
         quartoService.ocuparQuarto(quarto);
 
@@ -31,15 +31,15 @@ public class InternacaoService {
         internacaoRepository.salvar(novaInternacao);
 
         System.out.println("Paciente internado com sucesso! Quarto: " + quarto.getCodigo());
-        return novaInternacao;
+
     }
 
-    public Internacao darAlta(String internacaoId, int diasInternados, String dataSaida) {
+    public void darAlta(String internacaoId, int diasInternados ) {
 
         Internacao internacao = internacaoRepository.buscarPorId(internacaoId);
-        if (internacao == null || internacao.getDataSaida() != null || diasInternados <= 0) {
+        if (internacao == null ) {
             System.err.println("ERRO: Internação inválida ou já encerrada.");
-            return null;
+            return ;
         }
 
         Quarto quarto = quartoService.buscarPorId(internacao.getQuartoId());
@@ -47,27 +47,25 @@ public class InternacaoService {
 
         if (quarto == null || paciente == null) {
             System.err.println("ERRO Crítico: Recurso associado não encontrado.");
-            return null;
+            return ;
         }
 
+        internacao.setAtiva(false);
         double custoBaseTotal = (double) diasInternados * quarto.getCustoDiaria();
 
         double custoFinal = paciente.calcularDescontoInternacao(custoBaseTotal);
 
         quartoService.liberarQuarto(quarto);
 
-        internacao.setDataSaida(dataSaida);
         internacao.setCustoTotal(custoFinal);
         internacaoRepository.atualizar(internacao);
 
-        System.out.printf(" Alta realizada.\n Custo Base: R$ %.2f\n Custo Final: R$ %.2f\n", custoBaseTotal, custoFinal);
-        return internacao;
+        System.out.printf("\n Alta concedida com sucesso.\n Custo Base: R$ %.2f\n Custo Final: R$ %.2f\n", custoBaseTotal, custoFinal);
+
     }
 
     public List<Internacao> listarInternacoesAtivas() {
-        return internacaoRepository.listarTodas().stream()
-                .filter(i -> i.getDataSaida() == null)
-                .collect(Collectors.toList());
+        return internacaoRepository.listarTodas().stream().filter(Internacao::isAtiva).collect(Collectors.toList());
     }
 }
 

@@ -143,6 +143,9 @@ public class MenuMedicos {
                 if (resposta == 1 || resposta == 2 || resposta == 0) {
                     valido = false;
                 }
+                else{
+                    System.out.println("Digite uma opção válida\n");
+                }
             }
             return resposta;
         }

@@ -25,6 +25,7 @@ public class MenuConsultas{
             System.out.println("1. AGENDAR NOVA CONSULTA");
             System.out.println("2. LISTAR CONSULTAS FUTURAS");
             System.out.println("0. VOLTAR");
+
             op = entradaValida(sc);
 
             switch (op) {
@@ -47,14 +48,14 @@ public class MenuConsultas{
 
     private void menuAgendarConsulta(Scanner sc) {
         System.out.println("\n     AGENDAMENTO DE CONSULTA ");
-        Paciente paciente = selecionarPaciente(sc); // implementar looping para casos gerais de entradas erradas
+        Paciente paciente = selecionarPaciente(sc);
         if(paciente == null) {
-            System.out.println("Reinicie o procedimento de cadastro");
+            System.out.println("cadastre um novo paciente e tente novamente");
             return;
         }
         Medico medico = selecionarMedico(sc);
         if(medico == null){
-            System.out.println("Reinicie o procedimento de cadastro");
+            System.out.println("cadastre um novo médico e tente novamente");
             return;
         }
         String data;
@@ -83,20 +84,23 @@ public class MenuConsultas{
 
         if (lista.isEmpty()) {
             System.out.println("Nenhum paciente cadastrado no sistema...");
+            return null;
         }
         else {
             for (int i = 0; i < lista.size(); i++) {
                 System.out.printf("%d. %s (CPF: %s)\n", i + 1, lista.get(i).getNome(), lista.get(i).getCpf());
             }
+                int op;
+                do {
+                    op = entradaValida(sc);
+                    if (op < 0 || op > lista.size()) {
+                        System.out.println("Valor inválido, digite uma opção entre 1 e " + lista.size());
+                    }
+                }
 
-            int op = entradaValida(sc);
-
-            if (op > 0 && op <= lista.size()) {
-                return lista.get(op - 1);
-            }
-            System.out.println("Nenhum paciente encontrado para esse valor. Finalizando agendamento...");
+            while(op < 0 || op > lista.size());
+            return lista.get(op - 1);
         }
-        return null;
     }
 
     private Medico selecionarMedico(Scanner sc) {
@@ -105,18 +109,22 @@ public class MenuConsultas{
 
         if (lista.isEmpty()) {
             System.out.println("Nenhum médico cadastrado no sistema...");
-        } else {
+            return null;
+        }
+        else {
             for (int i = 0; i < lista.size(); i++) {
                 System.out.printf("%d. %s (CRM: %s)\n", i + 1, lista.get(i).getNome(), lista.get(i).getCrm());
             }
-            int op = entradaValida(sc);
-
-            if (op > 0 && op <= lista.size()) {
-                return lista.get(op - 1);
+            int op;
+            do {
+                op = entradaValida(sc);
+                if (op < 0 || op > lista.size()) {
+                    System.out.println("Valor inválido, digite uma opção entre 1 e " + lista.size());
+                }
             }
-            System.out.println("Médico não encontrado para esse valor. Finalizando...");
+            while (op < 0 || op > lista.size());
+            return lista.get(op - 1);
         }
-        return null;
     }
 
 
@@ -138,8 +146,10 @@ public class MenuConsultas{
 
         int op;
         do {
-            System.out.println("Digite o número do horário desejado ");
             op = entradaValida(sc);
+            if(op < 1 || op > horariosLivresComData.size()){
+                System.out.println("Opção inválida");
+            }
         } while (op < 1 || op > horariosLivresComData.size());
 
         // vai retornar o slot COMPLETO (com data e hora) para o agendarConsulta

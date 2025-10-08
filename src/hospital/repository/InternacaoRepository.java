@@ -44,12 +44,11 @@ public class InternacaoRepository {
                 String medicoId = campos[2];
                 String quartoId = campos[3];
                 String dataEntrada = campos[4];
-                String dataSaida = campos[5].equals("null") ? null : campos[5]; // Lida com o campo "null"
+                boolean ativa = Boolean.parseBoolean(campos[5]);
                 double custoTotal = Double.parseDouble(campos[6]);
                 Internacao internacao = new Internacao(id, pacienteId, medicoId, quartoId, dataEntrada);
 
-                // Sobrescreve os campos dataSaida e custoTotal se a internação já tiver tido alta
-                internacao.setDataSaida(dataSaida);
+                internacao.setAtiva(ativa);
                 internacao.setCustoTotal(custoTotal);
 
                 listaInternacoes.add(internacao);
