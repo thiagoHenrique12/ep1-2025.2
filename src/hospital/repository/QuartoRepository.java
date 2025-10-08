@@ -58,7 +58,7 @@ public class QuartoRepository {
                 boolean ocupado = Boolean.parseBoolean(campos[4]);
 
                 Quarto quarto = new Quarto(id, codigo, tipo, custoDiario);
-                quarto.setDisponibilidade(ocupado); // Atualiza o estado lido do arquivo
+                quarto.setDisponivel(ocupado); // Atualiza o estado lido do arquivo
                 listaQuartos.add(quarto);
             }
 

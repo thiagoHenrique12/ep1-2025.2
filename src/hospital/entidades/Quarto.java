@@ -1,7 +1,7 @@
 package hospital.entidades;
 
 public class Quarto {
-    private boolean disponibilidade;
+    private boolean ocupado;
     private double custoDiaria;
     private String codigo; //será como um nome para o quarto
     private String id;
@@ -12,7 +12,7 @@ public class Quarto {
         this.id = id;
         this.tipo = tipo;
         this.custoDiaria = custoDiario;
-        this.disponibilidade = false; // Inicialmente, todo quarto é livre
+        this.ocupado = false;
     }
 
 
@@ -48,20 +48,23 @@ public class Quarto {
         this.custoDiaria = custoDiaria;
     }
 
-    public boolean isDisponibilidade() {
-        return disponibilidade;
+    public boolean isOcupado() {
+        return ocupado;
     }
 
-    public void setDisponibilidade(boolean disponibilidade) {
-        this.disponibilidade = disponibilidade;
+    public void setDisponivel(boolean ocupado) {
+        this.ocupado = ocupado;
     }
 
-    public Quarto() {}
+    public void setOcupado(boolean ocupado) {
+        this.ocupado = ocupado;
+    }
+
 
 
     @Override
     public String toString() {
-        return id + ";" +  tipo + ";" + custoDiaria + ";" + disponibilidade;
+        return id + ";" +  tipo + ";" + custoDiaria + ";" + ocupado;
     }
 }
 
