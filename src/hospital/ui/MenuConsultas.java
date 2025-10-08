@@ -48,12 +48,12 @@ public class MenuConsultas{
         System.out.println("\n     AGENDAMENTO DE CONSULTA ");
         Paciente paciente = selecionarPaciente(sc); // implementar looping para casos gerais de entradas erradas
         if(paciente == null) {
-            System.out.println("Não foi possível concluir esse agendamento");
+            System.out.println("Reinicie o procedimento de cadastro");
             return;
         }
         Medico medico = selecionarMedico(sc);
         if(medico == null){
-            System.out.println("Não foi possível concluir esse agendamento");
+            System.out.println("Reinicie o procedimento de cadastro");
             return;
         }
         String data;
@@ -93,7 +93,7 @@ public class MenuConsultas{
             if (op > 0 && op <= lista.size()) {
                 return lista.get(op - 1);
             }
-            System.out.println("Paciente não encontrado.");
+            System.out.println("Nenhum paciente encontrado para esse valor. Finalizando agendamento...");
         }
         return null;
     }
@@ -113,7 +113,7 @@ public class MenuConsultas{
             if (op > 0 && op <= lista.size()) {
                 return lista.get(op - 1);
             }
-            System.out.println("Médico não encontrado...");
+            System.out.println("Médico não encontrado para esse valor. Finalizando...");
         }
         return null;
     }

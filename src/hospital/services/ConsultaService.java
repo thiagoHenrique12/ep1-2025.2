@@ -34,7 +34,7 @@ public class ConsultaService {
         consultaRepository.salvarConsulta(novaConsulta);
         Medico medico = medicoService.buscarPorId(medicoId);
         System.out.println();
-        System.out.println("Consulta agendada com sucesso para o médico: "+ medico.getNome()+ " às "+dataHora+"no(a) "+local);
+        System.out.println("Consulta agendada com o médico: "+ medico.getNome()+ " na data: "+dataHora+", "+local);
     }
 
     private boolean checarConflito(String novaDataHora,  String novoLocal) {
@@ -119,7 +119,8 @@ public class ConsultaService {
         return data;
     }
 
-    private static final List<String> salas = List.of(
+    //para adicionar novas salas no sistema basta atualizar essa lista
+    public static final List<String> salas = List.of(
             "Consultório 101",
             "Consultório 102",
             "Consultório 103",
@@ -129,7 +130,9 @@ public class ConsultaService {
             "Sala 301",
             "Sala 302",
             "Bloco Cirúrgico 501",
-            "Consultório 502 ");
+            "Consultório 502 ",
+            "Sala de internação 132",
+            "Sala de internação 133");
 
 
     public List<String> listarSalasDisponiveis() {
