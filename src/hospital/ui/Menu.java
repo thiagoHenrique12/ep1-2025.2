@@ -9,6 +9,7 @@ public class Menu {
     private final MenuMedicos menuMedicos = new MenuMedicos();
     private final MenuPlanos menuPlanos = new MenuPlanos();
     private final MenuConsultas menuConsultas=new MenuConsultas();
+    private final MenuInternacoes menuInternacoes = new MenuInternacoes();
     public void iniciar() {
 
         int op = -1;
@@ -18,6 +19,7 @@ public class Menu {
             System.out.println("2. MÉDICOS");
             System.out.println("3. CONSULTAS");
             System.out.println("4. PLANOS");
+            System.out.println("5. INTERNAÇÕES");
             System.out.println("0. SAIR");
             try {
                 System.out.print("Selecione uma opção: ");
@@ -38,6 +40,9 @@ public class Menu {
                     break;
                 case 4:
                     menuPlanos.exibirMenu(sc);
+                    break;
+                case 5:
+                    menuInternacoes.exibirMenu(sc);
                     break;
                 case 0:
                     System.out.println("Finalizando o sistema ...");

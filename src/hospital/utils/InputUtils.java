@@ -6,7 +6,6 @@ public class InputUtils {
     public static int entradaValida (Scanner sc){
         int entradaValida;
         do {
-            System.out.print("Selecione uma opção: ");
             entradaValida = validarInteiro(sc);
 
             if (entradaValida == -1) {
@@ -16,6 +15,27 @@ public class InputUtils {
         return entradaValida;
 
     }
+
+    public static String validarData(String data) {
+        String regex = "\\d{4}-\\d{2}-\\d{2}";
+        if (!data.matches(regex)) {
+            System.out.println("Formato inválido de data, siga exatamente o modelo e use apenas dígitos");
+            return null;
+        }
+        String[] dataSeparada = data.split("-");
+        int mes = Integer.parseInt(dataSeparada[1]);
+        int dia = Integer.parseInt(dataSeparada[2]);
+        if (dia > 30){
+            System.out.println("Data inválida, digite um dia entre 01 e 30");
+            return null;
+        }
+        if (mes > 12){
+            System.out.println("Data inválida, digite um mês entre 01 e 12");
+            return null;
+        }
+        return data;
+    }
+
     public static int validarInteiro(Scanner sc) {
         try {
             return Integer.parseInt(sc.nextLine());

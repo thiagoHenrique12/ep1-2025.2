@@ -16,8 +16,8 @@ public class Internacao {
         this.medicoId = medicoId;
         this.quartoId = quartoId;
         this.dataEntrada = dataEntrada;
-        this.dataSaida = null;     // Internação ativa
-        this.custoTotal = 0.0;     // Será calculado na alta
+        this.dataSaida = null;
+        this.custoTotal = 0.0;
     }
 
     public String getId() {
@@ -49,7 +49,6 @@ public class Internacao {
 
     @Override
     public String toString() {
-        // Formato CSV
         return id + ";" + pacienteId + ";" + medicoId + ";" + quartoId + ";" +
                 dataEntrada + ";" + dataSaida + ";" +  custoTotal;
     }

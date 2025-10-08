@@ -10,6 +10,7 @@ public class Quarto {
 
     public Quarto(String id, String codigo,String tipo, double custoDiario) {
         this.id = id;
+        this.codigo = codigo;
         this.tipo = tipo;
         this.custoDiaria = custoDiario;
         this.ocupado = false;
@@ -32,9 +33,6 @@ public class Quarto {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
 
     public double getCustoDiaria() {
         return custoDiaria;

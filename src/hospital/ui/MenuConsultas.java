@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static hospital.utils.InputUtils.entradaValida;
+import static hospital.utils.InputUtils.validarData;
 
 public class MenuConsultas{
     private final ConsultaService consultaService = new ConsultaService();
@@ -60,7 +61,7 @@ public class MenuConsultas{
         do {
             System.out.print("\nDigite a data da consulta (AAAA-MM-DD): ");
             data = sc.nextLine();
-            data = consultaService.validarData(data);
+            data = validarData(data);
         }
         while (data ==null);
 

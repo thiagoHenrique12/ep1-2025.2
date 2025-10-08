@@ -4,7 +4,6 @@ import hospital.entidades.Internacao;
 import hospital.entidades.Paciente;
 import hospital.entidades.Quarto;
 import hospital.repository.InternacaoRepository;
-import hospital.repository.QuartoRepository;
 
 import java.util.List;
 import java.util.UUID;

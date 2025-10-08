@@ -105,8 +105,6 @@ public class MenuMedicos {
         return abaPosCadastro(sc);
     }
 
-
-
     public String abaEspecialidades(Scanner sc){
         String especialidade;
         System.out.println();
