@@ -24,11 +24,27 @@ public class Internacao {
         return id;
     }
 
+    public String getPacienteId() {
+        return pacienteId;
+    }
+
+    public String getQuartoId() {
+        return quartoId;
+    }
+
     public void setDataSaida(String dataSaida) {
         this.dataSaida = dataSaida;
     }
     public void setCustoTotal(double custoTotal) {
         this.custoTotal = custoTotal;
+    }
+
+    public String getDataSaida() {
+        return dataSaida;
+    }
+
+    public String getDataEntrada() {
+        return dataEntrada;
     }
 
     @Override
