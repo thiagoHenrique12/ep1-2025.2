@@ -26,29 +26,82 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
    baixar o arquivo main no repositório do gitHub, abrir no IntelliJ, dentro de src buscar o arquivo Main e rodar pelo botão run da IDE
 
 3. **Estrutura de Pastas:**  
-   [Descrever aqui as principais pastas do projeto]
+   ep1-2025.2
+   │
+   ├
+   ├── .idea
+   ├── out
+   ├
+   │
+   ├── src/
+   │   ├── entidades/
+   │   │   ├── Consulta.java
+   │   │   ├── Especialidade.java
+   │   │   ├── Internacao.java
+   │   │   ├── Medico.java
+   │   │   ├── Paciente.java
+   │   │   ├── PacienteEspecial.java
+   │   │   ├── Pessoa.java
+   │   │   ├── PlanoSaude.java
+   │   │   ├── Quarto.java
+   │   │   ├── StatusConsulta.java
+   │   │   └── TipoQuarto.java
+   │   │
+   │   ├── repository/
+   │   │   ├── ConsultaRepository.java
+   │   │   ├── InternacaoRepository.java
+   │   │   ├── MedicoRepository.java
+   │   │   ├── PacienteRepository.java
+   │   │   ├── PlanoSaudeRepository.java
+   │   │   └── QuartoRepository.java
+   │   │
+   │   ├── services/
+   │   │   ├── ConsultaService.java
+   │   │   ├── InternacaoService.java
+   │   │   ├── MedicoService.java
+   │   │   ├── PacienteService.java
+   │   │   ├── PlanoSaudeService.java
+   │   │   └── QuartoService.java
+   │   │
+   │   ├── ui/
+   │   │   ├── Menu.java
+   │   │   ├── MenuConsultas.java
+   │   │   ├── MenuInternacoes.java
+   │   │   ├── MenuMedicos.java
+   │   │   ├── MenuPacientes.java
+   │   │   └── MenuPlanos.java
+   │   │
+   │   ├── utils/
+   │   │   └── InputUtils.java
+   │   │
+   │   └── Main.java
+  │    
+
+   
+
+  
 
 3. **Versão do JAVA utilizada:**  
-   [Descrever aqui como versão do JAVA utilizada no projeto. Sugestão: `java 21`]
+   zulu-21
 
 ---
 
 ## Vídeo de Demonstração
 
-- [Inserir o link para o vídeo no YouTube/Drive aqui]
+- https://youtu.be/USCBpPRQ6Gg
 
 ---
 
 ## Prints da Execução
 
 1. Menu Principal:  
-   ![Inserir Print 1](caminho/do/print1.png)
+   !![img.png](img.png)
 
 2. Cadastro de Médico:  
-   ![Inserir Print 2](caminho/do/print2.png)
+   !![img_1.png](img_1.png)
 
-3. Relatório de ?:  
-   ![Inserir Print 3](caminho/do/print3.png)
+3. Cadastro de Paciente:  
+   !![img_2.png](img_2.png)
 
 ---
 
@@ -56,7 +109,7 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 ## Observações (Extras ou Dificuldades)
 
-- [Espaço para o aluno comentar qualquer funcionalidade extra que implementou, dificuldades enfrentadas, ou considerações importantes.]
+Durante o desenvolvimento, tive dificuldades principalmente na serialização e no salvamento de dados em arquivos CSV. Também tive problemas na implementação dos blocos try-catch e na compreensão dos conceitos relacionados à persistência de dados. Esses pontos exigiram maior atenção e estudo.
 
 ---
 
