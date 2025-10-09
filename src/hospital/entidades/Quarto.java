@@ -58,7 +58,7 @@ public class Quarto {
 
     @Override
     public String toString() {
-        return id + ";" +  tipo + ";" + custoDiaria + ";" + ocupado;
+        return id + ";" +codigo+ ";" +  tipo + ";" + custoDiaria ;
     }
 }
 

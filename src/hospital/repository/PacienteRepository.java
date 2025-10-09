@@ -12,7 +12,7 @@ public class PacienteRepository {
     //padrão singleton
     private static final PacienteRepository instance = new PacienteRepository();
     private final List<Paciente> listaPacientes = new ArrayList<>();
-    private static final String arquivoPacientes = "src/hospital/data/pacientes.csv";
+    private static final String arquivoPacientes = "ep1-2025.2-main/src/hospital/data/pacientes.csv";
 
 
     private PacienteRepository(){
@@ -80,7 +80,7 @@ public class PacienteRepository {
             }
         }
              catch (FileNotFoundException e) {
-                System.out.println("Erro: Arquivo de pacientes não encontrado");
+                System.out.println("Iniciando arquivo de pacientes vazio");
         }
             catch(IOException | NumberFormatException e) {
             System.out.println("Falha ao salvar pacientes: \n" + e.getMessage());

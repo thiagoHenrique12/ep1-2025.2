@@ -10,7 +10,7 @@ public class MedicoRepository {
     //padrão singleton
     private static final MedicoRepository instance = new MedicoRepository();
     private final List<Medico> listaMedicos = new ArrayList<>();
-    private static final String arquivosMedicos = "src/hospital/data/medicos.csv";
+    private static final String arquivosMedicos = "ep1-2025.2-main/src/hospital/data/medicos.csv";
 
     private MedicoRepository(){
         carregarArquivo();
@@ -59,7 +59,7 @@ public class MedicoRepository {
 
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Erro: Arquivo de médicos não encontrado");
+            System.out.println("Iniciando arquivo de médicos vazio");
         } catch (IOException | NumberFormatException e) {
             System.out.println();
             System.err.println("Erro: Falha ao carregar dados de médicos: " + e.getMessage());

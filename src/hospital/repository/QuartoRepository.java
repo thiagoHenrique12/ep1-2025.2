@@ -10,7 +10,7 @@ public class QuartoRepository {
     // Padrão Singleton
     private static final QuartoRepository instance = new QuartoRepository();
     private final List<Quarto> listaQuartos = new ArrayList<>();
-    private static final String arquivosQuartos = "src/hospital/data/quartos.csv";
+    private static final String arquivosQuartos = "ep1-2025.2-main/src/hospital/data/quartos.csv";
 
     private QuartoRepository() {
         carregarDoArquivo();
@@ -28,6 +28,7 @@ public class QuartoRepository {
             listaQuartos.add(new Quarto("Q01", "101", "Privativo", 350.00));
             listaQuartos.add(new Quarto("Q02", "102", "Semi-privativo", 200.00));
             listaQuartos.add(new Quarto("Q03", "UTI", "UTI", 800.00));
+            listaQuartos.add(new Quarto("Q04","S03","Privativo",200.00));
             salvarParaArquivo();
     }
 
@@ -54,15 +55,13 @@ public class QuartoRepository {
                 String codigo = campos[1];
                 String tipo = campos[2];
                 double custoDiario = Double.parseDouble(campos[3]);
-                boolean ocupado = Boolean.parseBoolean(campos[4]);
 
                 Quarto quarto = new Quarto(id, codigo, tipo, custoDiario);
-                quarto.setDisponivel(ocupado); // Atualiza o estado lido do arquivo
                 listaQuartos.add(quarto);
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("Erro: arquivo de quartos não foi encontrado");
+            System.out.println("Iniciando arquivo de quartos vazio");
         } catch (IOException | NumberFormatException e) {
             System.out.println("Erro: Falha ao carregar dados de quartos: " + e.getMessage());
         }

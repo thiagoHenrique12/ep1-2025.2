@@ -1,5 +1,6 @@
 package hospital.services;
 
+import hospital.entidades.Internacao;
 import hospital.entidades.Quarto;
 import hospital.repository.QuartoRepository;
 import java.util.List;
@@ -32,5 +33,20 @@ public class QuartoService {
     public void liberarQuarto(Quarto quarto) {
         quarto.setOcupado(false);
         quartoRepository.atualizar(quarto);
+    }
+
+
+    public void reconciliacao(List<Internacao> internacoesAtivas) {
+
+        if (internacoesAtivas.isEmpty()) {
+            System.out.println(" Nenhuma internação ativa. Todos os quartos estão livres.");
+            return;
+        }
+        for (Internacao i : internacoesAtivas) {
+            Quarto quarto = quartoRepository.buscarPorId(i.getQuartoId());
+            if (quarto != null) {
+                quarto.setOcupado(true);
+            }
+        }
     }
 }

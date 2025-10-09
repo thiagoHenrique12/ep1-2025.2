@@ -1,3 +1,4 @@
-Q01;Privativo;350.0;false
-Q02;Semi-privativo;200.0;false
-Q03;UTI;800.0;false
+Q01;101;Privativo;350.0
+Q02;102;Semi-privativo;200.0
+Q03;UTI;UTI;800.0
+Q04;S03;Privativo;200.0

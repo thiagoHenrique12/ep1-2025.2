@@ -11,7 +11,7 @@ public class ConsultaRepository {
     //aplicação de singleton
     private static final ConsultaRepository instance = new ConsultaRepository();
     private final List<Consulta> listaConsultas= new ArrayList<>();
-    private static final String arquivosConsultas = "src/hospital/data/consultas.csv";
+    private static final String arquivosConsultas = "ep1-2025.2-main/src/hospital/data/consultas.csv";
 
 
     private ConsultaRepository(){
@@ -75,7 +75,7 @@ public class ConsultaRepository {
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("Erro: Arquivo de consultas não encontrado. Iniciando vazio.");
+            System.out.println("Iniciando arquivo de consultas vazio.");
         } catch (IOException | NumberFormatException e) {
             System.err.println("Erro: Falha ao carregar dados das consultas: " + e.getMessage());
         }

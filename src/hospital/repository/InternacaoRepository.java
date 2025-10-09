@@ -10,7 +10,7 @@ public class InternacaoRepository {
     // Padrão Singleton
     private static final InternacaoRepository instance = new InternacaoRepository();
     private final List<Internacao> listaInternacoes = new ArrayList<>();
-    private static final String arquivosInternacoes = "src/hospital/data/internacoes.csv";
+    private static final String arquivosInternacoes = "ep1-2025.2-main/src/hospital/data/internacoes.csv";
 
     private InternacaoRepository() {
         carregarDoArquivo();
@@ -55,7 +55,7 @@ public class InternacaoRepository {
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("Erro: Arquivo de internações não encontrado.");
+            System.out.println("Iniciando arquivo de internações vazio.");
         } catch (IOException | NumberFormatException e) {
             System.err.println("Falha ao carregar dados de internações: " + e.getMessage());
         }

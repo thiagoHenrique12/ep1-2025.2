@@ -6,13 +6,13 @@ import static hospital.utils.InputUtils.validarInteiro;
 
 public class Menu {
     // Scanner final usado como parâmetro
-    private final Scanner sc = new Scanner(System.in);
     private final MenuPacientes menuPacientes = new MenuPacientes();
     private final MenuMedicos menuMedicos = new MenuMedicos();
     private final MenuPlanos menuPlanos = new MenuPlanos();
     private final MenuConsultas menuConsultas=new MenuConsultas();
     private final MenuInternacoes menuInternacoes = new MenuInternacoes();
-    public void iniciar() {
+
+    public void iniciar(Scanner sc) {
 
         int op = -1;
         while (op != 0) {

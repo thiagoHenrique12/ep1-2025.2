@@ -11,7 +11,7 @@ public class PlanoSaudeRepository {
     //padrão singleton
     private static final PlanoSaudeRepository instance = new PlanoSaudeRepository();
     private final List<PlanoDeSaude> listaPlanos = new ArrayList<>();
-    private static final String arquivoPlanos = "src/hospital/data/planos.csv";
+    private static final String arquivoPlanos = "ep1-2025.2-main/src/hospital/data/planos.csv";
 
     private PlanoSaudeRepository(){
         carregarArquivo();
@@ -72,8 +72,8 @@ public class PlanoSaudeRepository {
                 listaPlanos.add(plano);
             }
         }
-        catch (FileNotFoundException e){
-            System.out.println("Arquivo de planos não foi encontrado");
+        catch (FileNotFoundException e) {
+            System.out.println("Iniciando arquivo de planos vazio");
         }
         catch (IOException | NumberFormatException e ){
             System.out.println("Falha ao carregar arquivo com planos: "+e.getMessage());
