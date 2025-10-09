@@ -35,6 +35,7 @@ public class MenuPacientes {
                     System.out.println("Entrada inválida.");
                 }
             } while (entradaValida == -1);
+
             op = entradaValida;
             switch (op) {
                 case 1:

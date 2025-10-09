@@ -2,6 +2,8 @@ package hospital.ui;
 
 import java.util.Scanner;
 
+import static hospital.utils.InputUtils.validarInteiro;
+
 public class Menu {
     // Scanner final usado como parâmetro
     private final Scanner sc = new Scanner(System.in);
@@ -21,13 +23,18 @@ public class Menu {
             System.out.println("4. PLANOS");
             System.out.println("5. INTERNAÇÕES");
             System.out.println("0. SAIR");
-            try {
+            int entradaValida;
+            do {
                 System.out.print("Selecione uma opção: ");
-                op = Integer.parseInt(sc.nextLine());
-            }
-            catch(NumberFormatException e){
-                op = -1;
-            }
+                entradaValida = validarInteiro(sc);
+
+                if (entradaValida == -1) {
+                    System.out.println("Entrada inválida. Digite apenas números.");
+                }
+            } while (entradaValida == -1);
+
+            op = entradaValida;
+
             switch (op){
                 case 1:
                     menuPacientes.exibirMenu(sc);

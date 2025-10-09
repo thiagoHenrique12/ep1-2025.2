@@ -20,10 +20,10 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 ## Instruções para Compilação e Execução
 
 1. **Compilação:**  
-   [Descrever aqui como compilar o projeto. Exemplo: `javac Main.java` ou o script usado]
+   projeto compilado usando o compilador interno do IntelliJ
 
 2. **Execução:**  
-   [Descrever aqui como executar o projeto. Exemplo: `java Main` ou o script usado]
+   baixar o arquivo main no repositório do gitHub, abrir no IntelliJ, dentro de src buscar o arquivo Main e rodar pelo botão run da IDE
 
 3. **Estrutura de Pastas:**  
    [Descrever aqui as principais pastas do projeto]

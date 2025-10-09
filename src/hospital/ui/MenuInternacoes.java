@@ -10,8 +10,7 @@ import hospital.utils.InputUtils;
 import java.util.List;
 import java.util.Scanner;
 
-import static hospital.utils.InputUtils.entradaValida;
-import static hospital.utils.InputUtils.validarData;
+import static hospital.utils.InputUtils.*;
 
 public class MenuInternacoes {
     private final InternacaoService internacaoService = new InternacaoService();
@@ -27,7 +26,6 @@ public class MenuInternacoes {
             System.out.println("2. DAR ALTA HOSPITALAR (Check-out)");
             System.out.println("3. LISTAR INTERNAÇÕES ATIVAS");
             System.out.println("0. VOLTAR");
-            System.out.print("Selecione uma opção: ");
             op = InputUtils.entradaValida(sc);
 
             switch (op) {
@@ -59,7 +57,6 @@ public class MenuInternacoes {
 
         Quarto quarto = selecionarQuarto(sc);
         if (quarto == null) {
-            System.out.println("Não foi possível internar. Nenhum quarto disponível encontrado.");
             return;
         }
 
@@ -87,9 +84,8 @@ public class MenuInternacoes {
 
         listarInternacoesAtivas();
 
-        int op = -1;
+        int op ;
         do {
-            System.out.print("\nSelecione o número da internação para dar alta: ");
              op = InputUtils.entradaValida(sc);
             if (op < 1 || op > ativas.size()) {
                 System.out.println("Seleção inválida.");
@@ -102,7 +98,7 @@ public class MenuInternacoes {
         int dias;
         do {
             System.out.print("Digite a quantidade de dias internados: ");
-            dias = InputUtils.entradaValida(sc);
+            dias = validarInteiro(sc);
             if (dias <= 0) System.out.println("O número de dias deve ser maior que zero.");
         } while (dias <= 0);
 
@@ -117,20 +113,26 @@ public class MenuInternacoes {
 
         if (lista.isEmpty()) {
             System.out.println("Nenhum paciente cadastrado no sistema...");
+            return null;
+
         }
         else {
             for (int i = 0; i < lista.size(); i++) {
                 System.out.printf("%d. %s (CPF: %s)\n", i + 1, lista.get(i).getNome(), lista.get(i).getCpf());
             }
-            System.out.print("Selecione uma opção: ");
-            int op = entradaValida(sc);
 
-            if (op > 0 && op <= lista.size()) {
-                return lista.get(op - 1);
+            int entradaValida;
+            do {
+                System.out.print("Selecione uma opção: ");
+                entradaValida = validarInteiro(sc);
+
+                if (entradaValida <= 0 || entradaValida > lista.size()) {
+                    System.out.println("Entrada inválida. ");
+                }
+            } while (entradaValida <= 0 || entradaValida > lista.size());
+
+                return lista.get(entradaValida - 1);
             }
-            System.out.println("Nenhum paciente encontrado para esse valor. Finalizando internação...");
-        }
-        return null;
     }
 
     private Medico selecionarMedico(Scanner sc) {
@@ -139,19 +141,25 @@ public class MenuInternacoes {
 
         if (lista.isEmpty()) {
             System.out.println("Nenhum médico cadastrado no sistema...");
+            return null;
+
         } else {
             for (int i = 0; i < lista.size(); i++) {
                 System.out.printf("%d. %s (CRM: %s)\n", i + 1, lista.get(i).getNome(), lista.get(i).getCrm());
             }
-            System.out.print("Selecione uma opção: ");
-            int op = entradaValida(sc);
 
-            if (op > 0 && op <= lista.size()) {
-                return lista.get(op - 1);
-            }
-            System.out.println("Médico não encontrado para esse valor. Finalizando...");
+            int entradaValida;
+            do {
+                System.out.print("Selecione uma opção: ");
+                entradaValida = validarInteiro(sc);
+
+                if (entradaValida <= 0 || entradaValida > lista.size()) {
+                    System.out.println("Entrada inválida. ");
+                }
+            } while (entradaValida <= 0 || entradaValida > lista.size());
+
+            return lista.get(entradaValida - 1);
         }
-        return null;
     }
 
     private Quarto selecionarQuarto(Scanner sc) {
@@ -171,17 +179,19 @@ public class MenuInternacoes {
                     i + 1, q.getCodigo(), q.getTipo(), q.getCustoDiaria());
         }
 
-        System.out.print("Digite o número do quarto desejado para internação: ");
-        int op = InputUtils.entradaValida(sc);
-
-        if (op > 0 && op <= disponiveis.size()) {
-            Quarto quartoSelecionado = disponiveis.get(op - 1);
-            System.out.printf("\nQuarto %s (%s) selecionado.\n", quartoSelecionado.getCodigo(), quartoSelecionado.getTipo());
-            return quartoSelecionado;
+        int op ;
+        do {
+            System.out.print("Selecione uma opção: ");
+            op = validarInteiro(sc);
+            if (op <= 0|| op > disponiveis.size()){
+                System.out.println("Opção inválida");
+            }
         }
+        while (op <= 0|| op > disponiveis.size());
 
-        System.out.println("Seleção inválida. Retornando ao menu.");
-        return null;
+        Quarto quartoSelecionado = disponiveis.get(op - 1);
+        System.out.printf("\nQuarto %s (%s) selecionado.\n", quartoSelecionado.getCodigo(), quartoSelecionado.getTipo());
+        return quartoSelecionado;
     }
 
 

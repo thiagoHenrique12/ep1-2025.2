@@ -23,7 +23,7 @@ public class QuartoRepository {
         return instance;
     }
 
-    //quartos iniciais disponíveis
+    //quartos disponíveis
     private void carregarQuartosIniciais() {
             listaQuartos.add(new Quarto("Q01", "101", "Privativo", 350.00));
             listaQuartos.add(new Quarto("Q02", "102", "Semi-privativo", 200.00));
@@ -39,7 +39,7 @@ public class QuartoRepository {
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.err.println("Erro: Falha ao salvar quartos: " + e.getMessage());
+            System.out.println("Erro: Falha ao salvar quartos: " + e.getMessage());
         }
     }
 
@@ -49,7 +49,6 @@ public class QuartoRepository {
             while ((linha = reader.readLine()) != null) {
 
                 String[] campos = linha.split(";");
-                if (campos.length < 5) continue; // Precisa de 5 campos
 
                 String id = campos[0];
                 String codigo = campos[1];
@@ -65,7 +64,7 @@ public class QuartoRepository {
         } catch (FileNotFoundException e) {
             System.out.println("Erro: arquivo de quartos não foi encontrado");
         } catch (IOException | NumberFormatException e) {
-            System.err.println("Erro: Falha ao carregar dados de quartos: " + e.getMessage());
+            System.out.println("Erro: Falha ao carregar dados de quartos: " + e.getMessage());
         }
     }
 
