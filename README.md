@@ -26,58 +26,7 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
    baixar o arquivo main no repositório do gitHub, abrir no IntelliJ, dentro de src buscar o arquivo Main e rodar pelo botão run da IDE
 
 3. **Estrutura de Pastas:**  
-   ep1-2025.2
-   │
-   ├
-   ├── .idea
-   ├── out
-   ├
-   │
-   ├── src/
-   │   ├── entidades/
-   │   │   ├── Consulta.java
-   │   │   ├── Especialidade.java
-   │   │   ├── Internacao.java
-   │   │   ├── Medico.java
-   │   │   ├── Paciente.java
-   │   │   ├── PacienteEspecial.java
-   │   │   ├── Pessoa.java
-   │   │   ├── PlanoSaude.java
-   │   │   ├── Quarto.java
-   │   │   ├── StatusConsulta.java
-   │   │   └── TipoQuarto.java
-   │   │
-   │   ├── repository/
-   │   │   ├── ConsultaRepository.java
-   │   │   ├── InternacaoRepository.java
-   │   │   ├── MedicoRepository.java
-   │   │   ├── PacienteRepository.java
-   │   │   ├── PlanoSaudeRepository.java
-   │   │   └── QuartoRepository.java
-   │   │
-   │   ├── services/
-   │   │   ├── ConsultaService.java
-   │   │   ├── InternacaoService.java
-   │   │   ├── MedicoService.java
-   │   │   ├── PacienteService.java
-   │   │   ├── PlanoSaudeService.java
-   │   │   └── QuartoService.java
-   │   │
-   │   ├── ui/
-   │   │   ├── Menu.java
-   │   │   ├── MenuConsultas.java
-   │   │   ├── MenuInternacoes.java
-   │   │   ├── MenuMedicos.java
-   │   │   ├── MenuPacientes.java
-   │   │   └── MenuPlanos.java
-   │   │
-   │   ├── utils/
-   │   │   └── InputUtils.java
-   │   │
-   │   └── Main.java
-  │    
-
-   
+  O codigo é construido com uma pasta Hospital dentro de src, através dela temos os pacotes (entidades, repository, services,ui,utils). Além disso dentro de src temos nossa Main executavel
 
   
 
